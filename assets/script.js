@@ -284,18 +284,41 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const contactForm = document.getElementById('contact-form');
   if (contactForm) {
-    contactForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const name = contactForm.name.value.trim();
-      const email = contactForm.email.value.trim();
-      const reason = contactForm.reason.value;
-      const message = contactForm.message.value.trim();
+    const status = document.getElementById('contact-status');
+    const submitBtn = contactForm.querySelector('button[type="submit"]');
 
-      const subject = encodeURIComponent(`Portfolio Contact — ${reason}`);
-      const body = encodeURIComponent(
-        `Name: ${name}\nEmail: ${email}\nReason: ${reason}\n\n${message}`
-      );
-      window.location.href = `mailto:anjaliskadur@gmail.com?subject=${subject}&body=${body}`;
+    function setStatus(message, type) {
+      if (!status) return;
+      status.textContent = message;
+      status.classList.remove('is-success', 'is-error');
+      if (type) status.classList.add('is-' + type);
+    }
+
+    contactForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      setStatus('Sending…', null);
+      if (submitBtn) submitBtn.disabled = true;
+
+      const payload = Object.fromEntries(new FormData(contactForm).entries());
+
+      try {
+        const res = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify(payload),
+        });
+        const data = await res.json();
+        if (res.ok && data.success) {
+          setStatus('Thanks! Your message has been sent — I\'ll get back to you soon.', 'success');
+          contactForm.reset();
+        } else {
+          setStatus(data.message || 'Something went wrong. Please try again, or email me directly.', 'error');
+        }
+      } catch (err) {
+        setStatus('Network error — please try again, or email me directly.', 'error');
+      } finally {
+        if (submitBtn) submitBtn.disabled = false;
+      }
     });
   }
 });
