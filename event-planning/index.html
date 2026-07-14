@@ -17,6 +17,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;0,600;1,500&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="icon" href="../favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/img/favicon/favicon-32.png">
+<link rel="apple-touch-icon" href="../assets/img/favicon/apple-touch-icon.png">
 <link rel="stylesheet" href="../assets/style.css">
 </head>
 <body>
@@ -27,21 +30,21 @@
         <span class="logo-mark"><img src="../assets/img/logo.jpg" alt="Anjali Kadur logo"></span> Anjali Kadur
       </a>
       <nav class="nav-links">
+        <a href="../bio/">Bio</a>
         <a href="../software-engineering/">Software Engineering</a>
         <a href="../tutoring/">Tutoring</a>
         <a href="../project-management/">Project Management</a>
-        <a href="../event-planning/" class="active">Event Planning</a>
-        <a href="../lighting-design/">Lighting Design</a>
         <a href="../silambam-houston/">Silambam Houston</a>
+        <a href="../lighting-design/">Lighting Design</a>
+        <a href="../event-planning/" class="active">Event Planning</a>
         <a href="../hobbies/">Hobbies</a>
-        <a href="../bio/">Bio</a>
       </nav>
       <button class="nav-toggle" aria-label="Toggle navigation"><span></span></button>
     </div>
   </header>
 <main>
     <section class="page-header wrap">
-      <p class="eyebrow">04 — Bring People Together</p>
+      <p class="eyebrow">07 — Bring People Together</p>
       <h1>Event Planning Portfolio</h1>
       <p>Run-of-show planning, vendor coordination, and the small details that make an event feel effortless — from the first guest list to the last thank-you.</p>
     </section>
@@ -55,7 +58,7 @@
     <section class="wrap">
       <div class="card-grid">
         <a class="card" href="event-one.html">
-          <div class="card-thumb has-image"><div class="carousel" data-autoplay="true">
+          <div class="card-thumb has-image event-thumb"><div class="carousel" data-autoplay="true">
       <div class="carousel-track"><div class="carousel-slide"><img src="../assets/img/04%20-%20event%20management/Girls%20Brunch/brunch1.jpeg" alt="Girls Brunch — photo 1"></div><div class="carousel-slide"><img src="../assets/img/04%20-%20event%20management/Girls%20Brunch/brunch2.jpeg" alt="Girls Brunch — photo 2"></div><div class="carousel-slide"><img src="../assets/img/04%20-%20event%20management/Girls%20Brunch/brunch3.jpeg" alt="Girls Brunch — photo 3"></div><div class="carousel-slide"><img src="../assets/img/04%20-%20event%20management/Girls%20Brunch/brunch4.jpeg" alt="Girls Brunch — photo 4"></div></div>
     </div></div>
           <div class="card-body">
@@ -64,8 +67,8 @@
           </div>
         </a>
         <a class="card" href="event-two.html">
-          <div class="card-thumb has-image"><div class="carousel" data-autoplay="true">
-      <div class="carousel-track"><div class="carousel-slide"><img src="../assets/img/04%20-%20event%20management/Grad%20party/IMG_4196.JPG" alt="Graduation Party — photo 1"></div><div class="carousel-slide"><img src="../assets/img/04%20-%20event%20management/Grad%20party/IMG_2106.jpeg" alt="Graduation Party — photo 2"></div><div class="carousel-slide"><img src="../assets/img/04%20-%20event%20management/Grad%20party/IMG_2107.jpeg" alt="Graduation Party — photo 3"></div><div class="carousel-slide"><img src="../assets/img/04%20-%20event%20management/Grad%20party/IMG_3860.jpeg" alt="Graduation Party — photo 4"></div></div>
+          <div class="card-thumb has-image event-thumb"><div class="carousel" data-autoplay="true">
+      <div class="carousel-track"><div class="carousel-slide"><img class="img-focus-grad-portrait" src="../assets/img/04%20-%20event%20management/Grad%20party/IMG_4196.JPG" alt="Graduation Party — photo 1"></div><div class="carousel-slide"><img src="../assets/img/04%20-%20event%20management/Grad%20party/IMG_2106.jpeg" alt="Graduation Party — photo 2"></div><div class="carousel-slide"><img src="../assets/img/04%20-%20event%20management/Grad%20party/IMG_2107.jpeg" alt="Graduation Party — photo 3"></div><div class="carousel-slide"><img src="../assets/img/04%20-%20event%20management/Grad%20party/IMG_3860.jpeg" alt="Graduation Party — photo 4"></div></div>
     </div></div>
           <div class="card-body">
             <h3>Graduation Party</h3>
@@ -79,10 +82,14 @@
     <div class="contact-head">
       <p class="eyebrow">Get in touch</p>
       <h2>Contact Me</h2>
-      <p>Have a project in mind, or just want to say hi? Fill this out — it'll open a pre-filled email for you to send.</p>
+      <p>Have a project in mind, or just want to say hi? Fill this out and it'll land straight in my inbox.</p>
     </div>
-    <form class="contact-form" id="contact-form">
-      <div class="form-row">
+    <form class="contact-form" id="contact-form" action="https://api.web3forms.com/submit" method="POST">
+      <input type="hidden" name="access_key" value="4b983313-cbaf-47f9-bd89-0d7f810e0e13">
+      <input type="hidden" name="subject" value="New message from anjalikadur.com">
+      <input type="hidden" name="from_name" value="anjalikadur.com portfolio">
+      <input type="checkbox" name="botcheck" class="hidden" style="display:none" tabindex="-1" autocomplete="off">
+<div class="form-row">
         <div class="form-field">
           <label for="contact-name">Name</label>
           <input type="text" id="contact-name" name="name" required>
@@ -104,12 +111,14 @@
         <textarea id="contact-message" name="message" rows="4" required></textarea>
       </div>
       <button type="submit" class="btn-download">Send Message &#8594;</button>
-    </form>
+    
+      <p class="contact-status" id="contact-status" role="status" aria-live="polite"></p>
+</form>
   </section>
 <footer class="site-footer">
     <div class="wrap">
       <span>&copy; 2026 Anjali Kadur</span>
-      <a href="../">Back to top &#8594;</a>
+      <a href="#">Back to top &#8594;</a>
     </div>
   </footer>
 <script src="../assets/script.js"></script>

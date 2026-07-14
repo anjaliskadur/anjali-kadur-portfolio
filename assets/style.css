@@ -302,7 +302,24 @@ a { color: inherit; text-decoration: none; }
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center center;
 }
+
+/* Image focus presets — tune crop anchor per photo */
+.carousel-slide img.img-focus-top,
+.gallery-item img.img-focus-top,
+.card-thumb img.img-focus-top,
+.about-photo img.img-focus-top { object-position: center 25%; }
+
+.carousel-slide img.img-focus-upper,
+.gallery-item img.img-focus-upper,
+.card-thumb img.img-focus-upper,
+.about-photo img.img-focus-upper { object-position: center 38%; }
+
+.carousel-slide img.img-focus-mid,
+.gallery-item img.img-focus-mid,
+.card-thumb img.img-focus-mid,
+.about-photo img.img-focus-mid { object-position: center 50%; }
 
 .about-text p {
   color: var(--ink);
@@ -337,8 +354,8 @@ a { color: inherit; text-decoration: none; }
   transform: translateY(-1px);
 }
 
-.resume-cta {
-  padding: 8px 0 100px;
+.about-resume {
+  margin-top: 12px;
 }
 
 .skills {
@@ -473,6 +490,7 @@ a { color: inherit; text-decoration: none; }
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center center;
   display: block;
 }
 
@@ -591,6 +609,17 @@ a { color: inherit; text-decoration: none; }
   transition: color 0.25s ease;
 }
 
+/* Full-tile hit area. With transform-style: preserve-3d (used for the tilt
+   effect) some browsers only register clicks on the text nodes, so this
+   transparent overlay — part of the anchor — makes the whole tile clickable. */
+.home-tile::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  z-index: 4;
+}
+
 /* ---------- Subpage detail (image + description) ---------- */
 .detail {
   padding: 0 0 110px;
@@ -632,8 +661,53 @@ a { color: inherit; text-decoration: none; }
   display: block;
 }
 
-.detail-figure.has-image.has-carousel {
+.detail-figure.event-photos-portrait.has-carousel {
+  aspect-ratio: 3 / 4;
+  max-width: 540px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.detail-figure.event-photos-landscape.has-carousel {
   aspect-ratio: 4 / 3;
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Event photos — show the full shot centered in the frame. */
+.detail-figure.event-photos.has-carousel .carousel-slide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface);
+}
+
+.detail-figure.event-photos.has-carousel .carousel-slide img {
+  object-fit: contain;
+  object-position: center center;
+}
+
+.detail-figure.has-image.has-carousel:not(.event-photos) {
+  aspect-ratio: 3 / 4;
+  max-width: 540px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.detail-figure.has-image.has-carousel:not(.event-photos) .carousel-slide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface);
+}
+
+.card-thumb.event-thumb .carousel-slide img:not([class*="img-focus-"]) {
+  object-position: center center;
+}
+
+.card-thumb img.img-focus-grad-portrait {
+  object-position: center 32%;
 }
 
 .detail-body {
@@ -652,6 +726,54 @@ a { color: inherit; text-decoration: none; }
 }
 
 .detail-body p + p { margin-top: 14px; }
+
+.detail .detail-body {
+  margin-bottom: 36px;
+}
+
+.photo-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 22px 18px;
+  margin: 8px 0 0;
+}
+
+.gallery-item {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.gallery-item img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  object-position: center center;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  background: var(--surface);
+  display: block;
+}
+
+.gallery-item figcaption {
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: var(--ink);
+  text-align: center;
+  letter-spacing: 0.01em;
+}
+
+@media (max-width: 560px) {
+  .photo-gallery {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px 12px;
+  }
+
+  .gallery-item figcaption {
+    font-size: 0.84rem;
+  }
+}
 
 .placeholder-note {
   display: inline-block;
@@ -673,6 +795,19 @@ a { color: inherit; text-decoration: none; }
   font-size: 1.8rem;
   font-weight: 600;
   margin: 8px 0 0;
+}
+
+.entries-header p {
+  max-width: 680px;
+  margin: 14px 0 0;
+  color: var(--ink);
+  opacity: 0.85;
+}
+
+.entries-header p a {
+  color: var(--pink-deep);
+  text-decoration: underline;
+  text-underline-offset: 2px;
 }
 
 .entries {

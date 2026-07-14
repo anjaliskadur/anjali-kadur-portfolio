@@ -198,8 +198,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // 1) Content blocks tip up into place as they enter the viewport.
     const revealSelector = [
       '.card', '.home-tile', '.page-header', '.detail-figure', '.detail-body',
-      '.entry-block', '.about-photo', '.about-text', '.skills-group',
-      '.testimonial-card', '.resume-cta', '.contact'
+      '.gallery-item', '.entry-block', '.about-photo', '.about-text', '.skills-group',
+      '.testimonial-card', '.about-resume', '.contact'
     ].join(', ');
     const revealEls = Array.from(document.querySelectorAll(revealSelector));
     revealEls.forEach((el) => el.classList.add('reveal-3d'));

@@ -13,10 +13,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Mighty Equities Website — Anjali Kadur</title>
-<meta name="description" content="Designed and built the Mighty Equities website end to end.">
+<meta name="description" content="Designed and built the Mighty Equities website end to end — a collaborative family office and evergreen fund investing across tech, real estate, hospitality, and consumer goods.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;0,600;1,500&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="icon" href="../favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/img/favicon/favicon-32.png">
+<link rel="apple-touch-icon" href="../assets/img/favicon/apple-touch-icon.png">
 <link rel="stylesheet" href="../assets/style.css">
 </head>
 <body>
@@ -27,14 +30,14 @@
         <span class="logo-mark"><img src="../assets/img/logo.jpg" alt="Anjali Kadur logo"></span> Anjali Kadur
       </a>
       <nav class="nav-links">
+        <a href="../bio/">Bio</a>
         <a href="../software-engineering/" class="active">Software Engineering</a>
         <a href="../tutoring/">Tutoring</a>
         <a href="../project-management/">Project Management</a>
-        <a href="../event-planning/">Event Planning</a>
-        <a href="../lighting-design/">Lighting Design</a>
         <a href="../silambam-houston/">Silambam Houston</a>
+        <a href="../lighting-design/">Lighting Design</a>
+        <a href="../event-planning/">Event Planning</a>
         <a href="../hobbies/">Hobbies</a>
-        <a href="../bio/">Bio</a>
       </nav>
       <button class="nav-toggle" aria-label="Toggle navigation"><span></span></button>
     </div>
@@ -43,16 +46,30 @@
     <section class="detail wrap">
       <a class="back-link" href="./">&#8592; Back to Software Engineering Projects</a>
       <div class="entries-header">
-        <div><span class="tag">Web Dev</span><span class="tag">Full Build</span></div>
+        <div><span class="tag">Web Design</span><span class="tag">Full Build</span><span class="tag">Client Work</span></div>
         <h2>Mighty Equities Website</h2>
+        <p>Mighty Equities is a collaborative family office and evergreen fund that partners with founders across tech, real estate, hospitality, and consumer goods. I designed and built their website end to end — turning a bold, editorial brand into a fast, fully responsive marketing site. The work spanned layout and typography, the image-led hero, page structure, and the site's navigation and calls to action. Live at <a href="https://www.mightyequities.com" target="_blank" rel="noopener">mightyequities.com</a>.</p>
       </div>
     </section>
     <section class="entries wrap">
       <div class="entry-block">
-      <div class="detail-figure"><span>Drop a screenshot or photo here</span></div>
+      <div class="detail-figure has-image"><img src="../assets/img/01%20-%20software%20engineering/mighty-equities/mighty-equities-home.png" alt="Mighty Equities homepage with a full-bleed hero image and the tagline Seeking the Relentless"></div>
       <div class="entry-body">
-        <h3>Mighty Equities Website</h3>
-        <p class="placeholder-note">Add your description here.</p>
+        <h3>Homepage &amp; Hero</h3>
+        <p>The landing experience opens on a full-bleed image carousel and the fund's tagline, <em>&#8220;Seeking the Relentless,&#8221;</em> with a supporting line about partnering with non-conforming overachievers. I built the rotating hero, the layered headline treatment in the brand's serif/italic type, and the primary calls to action — <em>Learn More</em> and <em>Our Portfolio</em> — that route visitors into the rest of the site.</p>
+      </div>
+    </div>
+      <div class="wrap"><div class="sprig"><svg viewBox="0 0 46 22" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <path d="M2 11C10 11 14 5 14 1" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+  <path d="M2 11C10 11 14 17 14 21" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+  <circle cx="23" cy="11" r="3" stroke="currentColor" stroke-width="1.2"/>
+  <path d="M44 11C36 11 32 5 32 1" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+  <path d="M44 11C36 11 32 17 32 21" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+</svg></div></div>
+      <div class="entry-block">
+      <div class="entry-body">
+        <h3>Structure &amp; Navigation</h3>
+        <p>Beyond the homepage, I set up the site's core sections — <strong>Philosophy</strong>, <strong>Portfolio</strong>, and <strong>Offices</strong> — and the navigation that ties them together, alongside the firm's focus areas: capital and financial investment across technology, real estate, hospitality, and consumer goods. The build emphasizes a premium, editorial feel while staying quick to load and readable on phones, tablets, and desktop.</p>
       </div>
     </div>
     </section>
@@ -61,10 +78,14 @@
     <div class="contact-head">
       <p class="eyebrow">Get in touch</p>
       <h2>Contact Me</h2>
-      <p>Have a project in mind, or just want to say hi? Fill this out — it'll open a pre-filled email for you to send.</p>
+      <p>Have a project in mind, or just want to say hi? Fill this out and it'll land straight in my inbox.</p>
     </div>
-    <form class="contact-form" id="contact-form">
-      <div class="form-row">
+    <form class="contact-form" id="contact-form" action="https://api.web3forms.com/submit" method="POST">
+      <input type="hidden" name="access_key" value="4b983313-cbaf-47f9-bd89-0d7f810e0e13">
+      <input type="hidden" name="subject" value="New message from anjalikadur.com">
+      <input type="hidden" name="from_name" value="anjalikadur.com portfolio">
+      <input type="checkbox" name="botcheck" class="hidden" style="display:none" tabindex="-1" autocomplete="off">
+<div class="form-row">
         <div class="form-field">
           <label for="contact-name">Name</label>
           <input type="text" id="contact-name" name="name" required>
@@ -86,12 +107,14 @@
         <textarea id="contact-message" name="message" rows="4" required></textarea>
       </div>
       <button type="submit" class="btn-download">Send Message &#8594;</button>
-    </form>
+    
+      <p class="contact-status" id="contact-status" role="status" aria-live="polite"></p>
+</form>
   </section>
 <footer class="site-footer">
     <div class="wrap">
       <span>&copy; 2026 Anjali Kadur</span>
-      <a href="../">Back to top &#8594;</a>
+      <a href="#">Back to top &#8594;</a>
     </div>
   </footer>
 <script src="../assets/script.js"></script>

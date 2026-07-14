@@ -17,6 +17,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;0,600;1,500&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="icon" href="../favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/img/favicon/favicon-32.png">
+<link rel="apple-touch-icon" href="../assets/img/favicon/apple-touch-icon.png">
 <link rel="stylesheet" href="../assets/style.css">
 </head>
 <body>
@@ -27,14 +30,14 @@
         <span class="logo-mark"><img src="../assets/img/logo.jpg" alt="Anjali Kadur logo"></span> Anjali Kadur
       </a>
       <nav class="nav-links">
+        <a href="../bio/">Bio</a>
         <a href="../software-engineering/">Software Engineering</a>
         <a href="../tutoring/">Tutoring</a>
         <a href="../project-management/">Project Management</a>
-        <a href="../event-planning/">Event Planning</a>
-        <a href="../lighting-design/">Lighting Design</a>
         <a href="../silambam-houston/">Silambam Houston</a>
+        <a href="../lighting-design/">Lighting Design</a>
+        <a href="../event-planning/">Event Planning</a>
         <a href="../hobbies/" class="active">Hobbies</a>
-        <a href="../bio/">Bio</a>
       </nav>
       <button class="nav-toggle" aria-label="Toggle navigation"><span></span></button>
     </div>
@@ -42,16 +45,24 @@
 <main>
     <section class="detail wrap">
       <a class="back-link" href="./">&#8592; Back to Hobbies</a>
-      <div class="detail-figure has-image has-carousel"><div class="carousel">
-      <div class="carousel-track"><div class="carousel-slide"><img src="../assets/img/07-hobbies/traveling/LA.jpeg" alt="Los Angeles"></div><div class="carousel-slide"><img src="../assets/img/07-hobbies/traveling/bangalore.jpeg" alt="Bangalore"></div><div class="carousel-slide"><img src="../assets/img/07-hobbies/traveling/nashville.jpeg" alt="Nashville"></div></div>
-      <button class="carousel-btn prev" aria-label="Previous">&#8249;</button>
-      <button class="carousel-btn next" aria-label="Next">&#8250;</button>
-      <div class="carousel-dots"><button class="carousel-dot active" aria-label="Go to photo 1"></button><button class="carousel-dot" aria-label="Go to photo 2"></button><button class="carousel-dot" aria-label="Go to photo 3"></button></div>
-    </div></div>
       <div class="detail-body">
         <div><span class="tag">Travel</span></div>
         <h2>Traveling</h2>
         <p>City wanders and favorite views from trips near and far — from Los Angeles and Nashville to Bangalore.</p>
+      </div>
+      <div class="photo-gallery">
+        <figure class="gallery-item">
+          <img class="img-focus-mid" src="../assets/img/07-hobbies/traveling/LA.jpeg" alt="Los Angeles" loading="lazy">
+          <figcaption>Los Angeles</figcaption>
+        </figure>
+        <figure class="gallery-item">
+          <img class="img-focus-mid" src="../assets/img/07-hobbies/traveling/bangalore.jpeg" alt="Bangalore" loading="lazy">
+          <figcaption>Bangalore</figcaption>
+        </figure>
+        <figure class="gallery-item">
+          <img class="img-focus-mid" src="../assets/img/07-hobbies/traveling/nashville.jpeg" alt="Nashville" loading="lazy">
+          <figcaption>Nashville</figcaption>
+        </figure>
       </div>
     </section>
   </main>
@@ -59,10 +70,14 @@
     <div class="contact-head">
       <p class="eyebrow">Get in touch</p>
       <h2>Contact Me</h2>
-      <p>Have a project in mind, or just want to say hi? Fill this out — it'll open a pre-filled email for you to send.</p>
+      <p>Have a project in mind, or just want to say hi? Fill this out and it'll land straight in my inbox.</p>
     </div>
-    <form class="contact-form" id="contact-form">
-      <div class="form-row">
+    <form class="contact-form" id="contact-form" action="https://api.web3forms.com/submit" method="POST">
+      <input type="hidden" name="access_key" value="4b983313-cbaf-47f9-bd89-0d7f810e0e13">
+      <input type="hidden" name="subject" value="New message from anjalikadur.com">
+      <input type="hidden" name="from_name" value="anjalikadur.com portfolio">
+      <input type="checkbox" name="botcheck" class="hidden" style="display:none" tabindex="-1" autocomplete="off">
+<div class="form-row">
         <div class="form-field">
           <label for="contact-name">Name</label>
           <input type="text" id="contact-name" name="name" required>
@@ -84,12 +99,14 @@
         <textarea id="contact-message" name="message" rows="4" required></textarea>
       </div>
       <button type="submit" class="btn-download">Send Message &#8594;</button>
-    </form>
+    
+      <p class="contact-status" id="contact-status" role="status" aria-live="polite"></p>
+</form>
   </section>
 <footer class="site-footer">
     <div class="wrap">
       <span>&copy; 2026 Anjali Kadur</span>
-      <a href="../">Back to top &#8594;</a>
+      <a href="#">Back to top &#8594;</a>
     </div>
   </footer>
 <script src="../assets/script.js"></script>
