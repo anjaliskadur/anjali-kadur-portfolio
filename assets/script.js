@@ -37,6 +37,16 @@ document.addEventListener('DOMContentLoaded', () => {
       document.body.appendChild(pill);
     }
 
+    function renumberVisibleTiles() {
+      let n = 0;
+      document.querySelectorAll('.home-tile').forEach((tile) => {
+        if (tile.classList.contains('is-hidden-recruiter')) return;
+        n += 1;
+        const num = tile.querySelector('.tile-num');
+        if (num) num.textContent = String(n).padStart(2, '0');
+      });
+    }
+
     function applyMode(type) {
       document.body.classList.remove('mode-recruiter', 'mode-explorer');
       if (type === 'recruiter') {
@@ -48,6 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelectorAll('.nav-links a, .home-tile').forEach((el) => {
           if (isBlockedHref(el.getAttribute('href'))) el.classList.add('is-hidden-recruiter');
         });
+        renumberVisibleTiles();
         addSwitchPill();
       } else {
         document.body.classList.add('mode-explorer');
