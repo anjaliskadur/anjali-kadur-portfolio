@@ -661,6 +661,16 @@ a { color: inherit; text-decoration: none; }
   display: block;
 }
 
+.detail-figure.is-device {
+  max-width: 340px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.detail-figure.is-device img {
+  border-radius: var(--radius);
+}
+
 .detail-figure.event-photos-portrait.has-carousel {
   aspect-ratio: 3 / 4;
   max-width: 540px;
@@ -843,6 +853,15 @@ a { color: inherit; text-decoration: none; }
 }
 
 .entry-body p + p { margin-top: 14px; }
+
+.entry-body ul {
+  margin: 14px 0 0;
+  padding-left: 1.2em;
+  color: var(--ink);
+  opacity: 0.85;
+}
+
+.entry-body li + li { margin-top: 8px; }
 
 .tag {
   display: inline-block;
