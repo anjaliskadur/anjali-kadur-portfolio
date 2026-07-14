@@ -1,17 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- ============================================================
+       Anjali Kadur — Portfolio Sitemap
+       Priority guide:  1.0 Home  ·  0.8 Section  ·  0.6 Detail page
+       ============================================================ -->
+
+  <!-- Home -->
   <url>
     <loc>https://www.anjalikadur.com/</loc>
     <lastmod>2026-07-14</lastmod>
     <priority>1.0</priority>
   </url>
 
+  <!-- Bio -->
   <url>
     <loc>https://www.anjalikadur.com/bio/</loc>
     <lastmod>2026-07-14</lastmod>
     <priority>0.8</priority>
   </url>
 
+  <!-- Software Engineering -->
   <url>
     <loc>https://www.anjalikadur.com/software-engineering/</loc>
     <lastmod>2026-07-14</lastmod>
@@ -43,85 +52,7 @@
     <priority>0.6</priority>
   </url>
 
-  <url>
-    <loc>https://www.anjalikadur.com/silambam-houston/</loc>
-    <lastmod>2026-07-14</lastmod>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.anjalikadur.com/silambam-houston/akkas-alcove.html</loc>
-    <lastmod>2026-07-14</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.anjalikadur.com/silambam-houston/digital-treasure-box.html</loc>
-    <lastmod>2026-07-14</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.anjalikadur.com/silambam-houston/facility-manager.html</loc>
-    <lastmod>2026-07-14</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.anjalikadur.com/silambam-houston/faculty-member.html</loc>
-    <lastmod>2026-07-14</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.anjalikadur.com/silambam-houston/lead-tech-stage-manager.html</loc>
-    <lastmod>2026-07-14</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.anjalikadur.com/silambam-houston/website-manager.html</loc>
-    <lastmod>2026-07-14</lastmod>
-    <priority>0.6</priority>
-  </url>
-
-  <url>
-    <loc>https://www.anjalikadur.com/project-management/</loc>
-    <lastmod>2026-07-14</lastmod>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.anjalikadur.com/project-management/notion-dashboard.html</loc>
-    <lastmod>2026-07-14</lastmod>
-    <priority>0.6</priority>
-  </url>
-
-  <url>
-    <loc>https://www.anjalikadur.com/lighting-design/</loc>
-    <lastmod>2026-07-14</lastmod>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.anjalikadur.com/lighting-design/show-one.html</loc>
-    <lastmod>2026-07-14</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.anjalikadur.com/lighting-design/show-two.html</loc>
-    <lastmod>2026-07-14</lastmod>
-    <priority>0.6</priority>
-  </url>
-
-  <url>
-    <loc>https://www.anjalikadur.com/event-planning/</loc>
-    <lastmod>2026-07-14</lastmod>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.anjalikadur.com/event-planning/event-one.html</loc>
-    <lastmod>2026-07-14</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.anjalikadur.com/event-planning/event-two.html</loc>
-    <lastmod>2026-07-14</lastmod>
-    <priority>0.6</priority>
-  </url>
-
+  <!-- Tutoring -->
   <url>
     <loc>https://www.anjalikadur.com/tutoring/</loc>
     <lastmod>2026-07-14</lastmod>
@@ -158,6 +89,90 @@
     <priority>0.6</priority>
   </url>
 
+  <!-- Project Management -->
+  <url>
+    <loc>https://www.anjalikadur.com/project-management/</loc>
+    <lastmod>2026-07-14</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.anjalikadur.com/project-management/notion-dashboard.html</loc>
+    <lastmod>2026-07-14</lastmod>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Event Planning -->
+  <url>
+    <loc>https://www.anjalikadur.com/event-planning/</loc>
+    <lastmod>2026-07-14</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.anjalikadur.com/event-planning/event-one.html</loc>
+    <lastmod>2026-07-14</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.anjalikadur.com/event-planning/event-two.html</loc>
+    <lastmod>2026-07-14</lastmod>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Lighting Design -->
+  <url>
+    <loc>https://www.anjalikadur.com/lighting-design/</loc>
+    <lastmod>2026-07-14</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.anjalikadur.com/lighting-design/show-one.html</loc>
+    <lastmod>2026-07-14</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.anjalikadur.com/lighting-design/show-two.html</loc>
+    <lastmod>2026-07-14</lastmod>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Silambam Houston -->
+  <url>
+    <loc>https://www.anjalikadur.com/silambam-houston/</loc>
+    <lastmod>2026-07-14</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.anjalikadur.com/silambam-houston/akkas-alcove.html</loc>
+    <lastmod>2026-07-14</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.anjalikadur.com/silambam-houston/digital-treasure-box.html</loc>
+    <lastmod>2026-07-14</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.anjalikadur.com/silambam-houston/facility-manager.html</loc>
+    <lastmod>2026-07-14</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.anjalikadur.com/silambam-houston/faculty-member.html</loc>
+    <lastmod>2026-07-14</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.anjalikadur.com/silambam-houston/lead-tech-stage-manager.html</loc>
+    <lastmod>2026-07-14</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.anjalikadur.com/silambam-houston/website-manager.html</loc>
+    <lastmod>2026-07-14</lastmod>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Hobbies -->
   <url>
     <loc>https://www.anjalikadur.com/hobbies/</loc>
     <lastmod>2026-07-14</lastmod>
@@ -203,4 +218,5 @@
     <lastmod>2026-07-14</lastmod>
     <priority>0.6</priority>
   </url>
+
 </urlset>
