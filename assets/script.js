@@ -107,6 +107,70 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   })();
 
+  // ---------- Lighting Design: under construction notice ----------
+  (function lightingDesignConstruction() {
+    if (!/\/lighting-design(\/|$)/.test(window.location.pathname)) return;
+
+    function showConstructionModal() {
+      if (document.querySelector('.construction-modal')) return;
+
+      const overlay = document.createElement('div');
+      overlay.className = 'visitor-modal construction-modal';
+      overlay.setAttribute('role', 'dialog');
+      overlay.setAttribute('aria-modal', 'true');
+      overlay.setAttribute('aria-labelledby', 'construction-modal-title');
+      overlay.innerHTML =
+        '<div class="visitor-modal-card">' +
+        '  <p class="visitor-modal-eyebrow">Lighting Design</p>' +
+        '  <h2 id="construction-modal-title">Under construction</h2>' +
+        '  <p class="visitor-modal-sub">This section is still being built. Check back soon for lighting plots, mood boards, and production photos.</p>' +
+        '  <div class="visitor-modal-actions">' +
+        '    <button type="button" class="btn-visitor" data-action="dismiss">Got it</button>' +
+        '    <button type="button" class="btn-visitor btn-visitor-alt" data-action="home">Back to home</button>' +
+        '  </div>' +
+        '</div>';
+
+      function closeModal() {
+        overlay.classList.remove('is-visible');
+        document.body.classList.remove('modal-open');
+        setTimeout(() => overlay.remove(), 250);
+      }
+
+      overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) closeModal();
+      });
+
+      overlay.querySelector('[data-action="dismiss"]').addEventListener('click', closeModal);
+      overlay.querySelector('[data-action="home"]').addEventListener('click', () => {
+        const logo = document.querySelector('.logo');
+        window.location.href = (logo && logo.getAttribute('href')) || '../';
+      });
+
+      document.addEventListener('keydown', function onKey(e) {
+        if (e.key === 'Escape') {
+          closeModal();
+          document.removeEventListener('keydown', onKey);
+        }
+      });
+
+      document.body.appendChild(overlay);
+      document.body.classList.add('modal-open');
+      requestAnimationFrame(() => overlay.classList.add('is-visible'));
+    }
+
+    if (document.querySelector('.visitor-modal')) {
+      const observer = new MutationObserver(() => {
+        if (!document.querySelector('.visitor-modal')) {
+          observer.disconnect();
+          showConstructionModal();
+        }
+      });
+      observer.observe(document.body, { childList: true });
+    } else {
+      showConstructionModal();
+    }
+  })();
+
   const toggle = document.querySelector('.nav-toggle');
   const links = document.querySelector('.nav-links');
   if (toggle && links) {

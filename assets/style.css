@@ -234,6 +234,12 @@ a { color: inherit; text-decoration: none; }
   font-size: 1.05rem;
 }
 
+.page-header p a {
+  color: var(--pink-deep);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
 .back-link {
   display: inline-flex;
   align-items: center;
@@ -736,6 +742,21 @@ a { color: inherit; text-decoration: none; }
 }
 
 .detail-body p + p { margin-top: 14px; }
+
+.detail-body ul {
+  margin: 14px 0 0;
+  padding-left: 1.2em;
+  color: var(--ink);
+  opacity: 0.85;
+}
+
+.detail-body li + li { margin-top: 8px; }
+
+.detail-body a {
+  color: var(--pink-deep);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
 
 .detail .detail-body {
   margin-bottom: 36px;
