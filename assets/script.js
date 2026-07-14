@@ -115,6 +115,41 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // Collapse the nav into the hamburger the moment the links stop fitting.
+  // We measure in the expanded (row) layout, then decide — all within one
+  // synchronous pass so the browser only ever paints the final state.
+  const siteNav = document.querySelector('.site-nav');
+  const navWrap = siteNav && siteNav.querySelector('.wrap');
+  if (siteNav && navWrap && links && toggle) {
+    let navRaf = 0;
+
+    const measureNav = () => {
+      navRaf = 0;
+      // Temporarily drop the collapsed styling so the links lay out as a row.
+      const wasCollapsed = document.body.classList.contains('nav-collapsed');
+      document.body.classList.remove('nav-collapsed');
+      // Compare the space the row needs against the space available.
+      const overflowing = navWrap.scrollWidth > navWrap.clientWidth + 1;
+      if (overflowing) {
+        document.body.classList.add('nav-collapsed');
+      } else if (wasCollapsed) {
+        links.classList.remove('open');
+      }
+    };
+
+    const scheduleMeasure = () => {
+      if (navRaf) return;
+      navRaf = requestAnimationFrame(measureNav);
+    };
+
+    measureNav();
+    window.addEventListener('resize', scheduleMeasure, { passive: true });
+    window.addEventListener('load', measureNav);
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(measureNav).catch(() => {});
+    }
+  }
+
   document.querySelectorAll('.carousel').forEach((carousel, carouselIndex) => {
     const track = carousel.querySelector('.carousel-track');
     const slides = track ? Array.from(track.children) : [];
