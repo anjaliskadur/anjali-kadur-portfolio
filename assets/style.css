@@ -1,0 +1,1277 @@
+/* ===========================================================
+   Anjali Kadur — Portfolio
+   Design tokens
+   =========================================================== */
+:root {
+  --bg:        #F8F5F1;  /* soft off-white, warmth dialed down */
+  --surface:   #FFFFFF;  /* card surface, clean white */
+  --ink:       #3D2E22;  /* warm umber-black for text */
+  --muted:     #8C7A68;  /* warm taupe, secondary text */
+  --pink:      #DCAA9C;  /* dusty rose-terracotta accent */
+  --pink-deep: #BE7459;  /* terracotta, hover/active */
+  --sage:      #97A187;  /* muted sage, secondary accent */
+  --line:      #E6DFD4;  /* hairline border, soft neutral */
+
+  --display: 'Fraunces', 'Iowan Old Style', Georgia, serif;
+  --body: 'Outfit', 'Helvetica Neue', Arial, sans-serif;
+
+  --radius: 14px;
+  --radius-sm: 8px;
+  --max-w: 1080px;
+  --arch: 20px; /* rounded-rectangle frame for imagery */
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+
+.wrap {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 28px;
+}
+
+/* ---------- Botanical divider — the signature motif ----------
+   A hand-drawn sprig, used between major sections instead of a
+   plain hairline rule. Echoes the dried-floral, line-art look
+   of the boho reference moodboard. */
+.sprig {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  color: var(--pink-deep);
+  opacity: 0.7;
+  margin: 0 auto;
+}
+.sprig svg { width: 46px; height: 22px; }
+.sprig::before,
+.sprig::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--line);
+  max-width: 220px;
+}
+
+/* ---------- Arch frame — signature shape for screenshots/photos ---------- */
+.arch-frame {
+  border-radius: var(--arch);
+  overflow: hidden;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  position: relative;
+}
+
+/* ---------- Decorative organic blob (background accent) ---------- */
+.blob {
+  position: absolute;
+  border-radius: 58% 42% 62% 38% / 41% 56% 44% 59%;
+  background: var(--pink);
+  opacity: 0.35;
+  filter: blur(0.5px);
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ---------- Nav ---------- */
+.site-nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(248, 245, 241, 0.92);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line);
+}
+
+.site-nav .wrap {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  column-gap: 24px;
+  height: 116px;
+  max-width: 1440px;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: nowrap;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  justify-self: center;
+  white-space: nowrap;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 1.2rem;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+  justify-self: start;
+}
+
+.logo-mark {
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+  border: 2px solid var(--line);
+}
+
+.logo-mark img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.nav-links a {
+  color: var(--muted);
+  padding: 6px 2px;
+  border-bottom: 2px solid transparent;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  color: var(--ink);
+  border-bottom-color: var(--pink-deep);
+}
+
+.nav-links a:last-child {
+  color: var(--pink-deep);
+  font-weight: 600;
+}
+
+/* ---------- Hero (home page) ---------- */
+.hero {
+  position: relative;
+  padding: 96px 0 64px;
+  text-align: center;
+}
+
+.hero .eyebrow {
+  font-size: 0.82rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--pink-deep);
+  font-weight: 600;
+  margin-bottom: 18px;
+}
+
+.hero h1 {
+  font-family: var(--display);
+  font-size: clamp(2.6rem, 6vw, 4.6rem);
+  font-weight: 600;
+  line-height: 1.05;
+  margin: 0 0 22px;
+  letter-spacing: -0.01em;
+}
+
+.hero h1 em {
+  font-style: italic;
+  color: var(--pink-deep);
+}
+
+.hero p {
+  max-width: 560px;
+  margin: 0 auto;
+  color: var(--muted);
+  font-size: 1.08rem;
+}
+
+/* ---------- Page header (hub / subpage) ---------- */
+.page-header {
+  padding: 64px 0 40px;
+}
+
+.page-header .eyebrow {
+  font-size: 0.8rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--pink-deep);
+  font-weight: 600;
+  margin-bottom: 14px;
+}
+
+.page-header h1 {
+  font-family: var(--display);
+  font-size: clamp(2.2rem, 5vw, 3.2rem);
+  font-weight: 600;
+  margin: 0 0 16px;
+  letter-spacing: -0.01em;
+}
+
+.page-header p {
+  max-width: 620px;
+  color: var(--muted);
+  font-size: 1.05rem;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 22px;
+  transition: color 0.2s ease;
+}
+.back-link:hover { color: var(--pink-deep); }
+
+.btn-download {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--ink);
+  color: var(--surface);
+  padding: 12px 22px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  margin-top: 8px;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.btn-download:hover {
+  background: var(--pink-deep);
+  transform: translateY(-1px);
+}
+
+/* ---------- About (bio page) ---------- */
+.about {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 40px;
+  align-items: start;
+  padding: 8px 0 40px;
+}
+
+.about-photo {
+  aspect-ratio: 1 / 1;
+  border-radius: var(--radius);
+  border: 1.5px dashed var(--pink-deep);
+  background: repeating-linear-gradient(45deg, var(--bg), var(--bg) 12px, var(--surface) 12px, var(--surface) 24px);
+  display: grid;
+  place-items: center;
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.85rem;
+  padding: 20px;
+}
+
+.about-photo.has-image {
+  border-style: solid;
+  border-color: var(--line);
+  padding: 0;
+  overflow: hidden;
+}
+
+.about-photo.has-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.about-text p {
+  color: var(--ink);
+  opacity: 0.85;
+  margin: 0 0 14px;
+}
+
+.social-links {
+  display: flex;
+  gap: 12px;
+  margin-top: 18px;
+  flex-wrap: wrap;
+}
+
+.social-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink);
+  padding: 9px 18px;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.social-link:hover {
+  border-color: var(--pink-deep);
+  color: var(--pink-deep);
+  transform: translateY(-1px);
+}
+
+.resume-cta {
+  padding: 8px 0 100px;
+}
+
+.skills {
+  padding-bottom: 20px;
+}
+
+.skills > .eyebrow {
+  font-size: 0.8rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--pink-deep);
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.skills-note {
+  color: var(--muted);
+  font-size: 0.88rem;
+  max-width: 560px;
+  margin: 0 0 32px;
+}
+
+.skills-note code {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 1px 6px;
+  font-size: 0.85em;
+}
+
+.skills-groups {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 32px;
+}
+
+.skills-group h3 {
+  font-family: var(--display);
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0 0 14px;
+}
+
+.skills-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.skills-pills .tag {
+  margin: 0;
+}
+
+/* ---------- Card grid (hub pages: subpages within a main page) ---------- */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  gap: 28px;
+  padding: 8px 0 96px;
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--arch);
+  overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 34px -22px rgba(56, 48, 42, 0.35);
+  border-color: var(--pink);
+}
+
+.card-thumb {
+  aspect-ratio: 4 / 3;
+  background:
+    repeating-linear-gradient(45deg, var(--bg), var(--bg) 10px, var(--surface) 10px, var(--surface) 20px);
+  border-bottom: 1px dashed var(--line);
+  display: grid;
+  place-items: center;
+  color: var(--muted);
+  font-size: 0.78rem;
+  text-align: center;
+  padding: 16px;
+  letter-spacing: 0.02em;
+}
+
+.card-thumb span {
+  background: var(--surface);
+  border: 1px dashed var(--pink-deep);
+  border-radius: 999px;
+  padding: 6px 14px;
+}
+
+.card-thumb.has-image {
+  background: var(--surface);
+  padding: 0;
+  overflow: hidden;
+}
+
+.card-thumb.has-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+}
+
+/* ---------- Carousel — for subpages with multiple photos ---------- */
+.carousel {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.carousel-track {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.4s ease;
+}
+
+.carousel-slide {
+  flex: 0 0 100%;
+  width: 100%;
+  height: 100%;
+}
+
+.carousel-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid var(--line);
+  display: grid;
+  place-items: center;
+  font-size: 1.2rem;
+  line-height: 1;
+  color: var(--ink);
+  cursor: pointer;
+  z-index: 2;
+  transition: background 0.2s ease;
+}
+.carousel-btn:hover { background: var(--surface); }
+.carousel-btn.prev { left: 10px; }
+.carousel-btn.next { right: 10px; }
+
+.carousel-dots {
+  position: absolute;
+  bottom: 12px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  gap: 7px;
+  z-index: 2;
+}
+
+.carousel-dot {
+  width: 7px;
+  height: 7px;
+  padding: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid var(--pink-deep);
+  cursor: pointer;
+}
+.carousel-dot.active { background: var(--pink-deep); }
+
+.card-body { padding: 22px 24px 26px; }
+
+.card-body h3 {
+  font-family: var(--display);
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 0 0 8px;
+}
+
+.card-body p {
+  color: var(--muted);
+  font-size: 0.92rem;
+  margin: 0;
+}
+
+/* ---------- Six-tile home grid ---------- */
+.home-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+  padding: 8px 0 100px;
+}
+
+.home-tile {
+  position: relative;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 30px 24px;
+  min-height: 170px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+}
+
+.home-tile:nth-child(even) { margin-top: 26px; }
+
+.home-tile:hover {
+  transform: translateY(-5px);
+  background: var(--pink);
+  box-shadow: 0 20px 38px -24px rgba(56, 48, 42, 0.4);
+}
+
+.home-tile:hover .tile-num,
+.home-tile:hover h2,
+.home-tile:hover p { color: var(--surface); }
+
+.home-tile .tile-num {
+  font-family: var(--display);
+  font-size: 0.85rem;
+  color: var(--pink-deep);
+  font-weight: 600;
+  transition: color 0.25s ease;
+}
+
+.home-tile h2 {
+  font-family: var(--display);
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 14px 0 8px;
+  transition: color 0.25s ease;
+}
+
+.home-tile p {
+  font-size: 0.88rem;
+  color: var(--muted);
+  margin: 0;
+  transition: color 0.25s ease;
+}
+
+/* ---------- Subpage detail (image + description) ---------- */
+.detail {
+  padding: 0 0 110px;
+}
+
+.detail-figure {
+  aspect-ratio: 16 / 9;
+  background: repeating-linear-gradient(45deg, var(--bg), var(--bg) 12px, var(--surface) 12px, var(--surface) 24px);
+  border: 1.5px dashed var(--pink-deep);
+  border-radius: var(--arch);
+  display: grid;
+  place-items: center;
+  color: var(--muted);
+  font-size: 0.88rem;
+  text-align: center;
+  margin-bottom: 36px;
+  padding: 24px;
+}
+
+.detail-figure span {
+  background: var(--surface);
+  border-radius: 999px;
+  padding: 8px 18px;
+  border: 1px solid var(--line);
+}
+
+.detail-figure.has-image {
+  display: block;
+  aspect-ratio: auto;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 0;
+  background: var(--surface);
+}
+
+.detail-figure.has-image img {
+  width: 100%;
+  display: block;
+}
+
+.detail-figure.has-image.has-carousel {
+  aspect-ratio: 4 / 3;
+}
+
+.detail-body {
+  max-width: 680px;
+}
+
+.detail-body h2 {
+  font-family: var(--display);
+  font-size: 1.4rem;
+  margin: 0 0 12px;
+}
+
+.detail-body p {
+  color: var(--ink);
+  opacity: 0.85;
+}
+
+.detail-body p + p { margin-top: 14px; }
+
+.placeholder-note {
+  display: inline-block;
+  border: 1px dashed var(--pink-deep);
+  border-radius: 999px;
+  padding: 7px 16px;
+  color: var(--muted);
+  font-size: 0.85rem;
+  font-style: italic;
+}
+
+/* ---------- Multi-entry project pages (e.g. Scour, MCP Server) ---------- */
+.entries-header {
+  padding-top: 4px;
+}
+
+.entries-header h2 {
+  font-family: var(--display);
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin: 8px 0 0;
+}
+
+.entries {
+  padding: 0 0 100px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.entry-block {
+  padding: 36px 0;
+}
+
+.entry-block .detail-figure {
+  margin-bottom: 26px;
+}
+
+.entry-body {
+  max-width: 680px;
+}
+
+.entry-body h3 {
+  font-family: var(--display);
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0 0 12px;
+}
+
+.entry-body p {
+  color: var(--ink);
+  opacity: 0.85;
+  margin: 0;
+}
+
+.entry-body p + p { margin-top: 14px; }
+
+.tag {
+  display: inline-block;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+  padding: 5px 12px;
+  border-radius: 999px;
+  margin: 0 8px 8px 0;
+}
+
+/* ---------- Testimonials ---------- */
+.testimonials {
+  padding: 8px 0 100px;
+}
+
+.testimonials-head {
+  text-align: center;
+  margin-bottom: 36px;
+}
+
+.testimonials-head .eyebrow {
+  font-size: 0.78rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--pink-deep);
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.testimonials-head h2 {
+  font-family: var(--display);
+  font-size: 1.9rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.testimonial-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+}
+
+.testimonial-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 28px 26px 24px;
+  position: relative;
+}
+
+.testimonial-mark {
+  font-family: var(--display);
+  font-style: italic;
+  font-size: 2.6rem;
+  line-height: 1;
+  color: var(--pink);
+  display: block;
+  margin-bottom: 6px;
+}
+
+.testimonial-quote {
+  font-size: 0.95rem;
+  color: var(--ink);
+  opacity: 0.85;
+  margin: 0 0 20px;
+}
+
+.testimonial-person {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.testimonial-avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: var(--arch);
+  background: var(--bg);
+  border: 1px solid var(--line);
+  display: grid;
+  place-items: center;
+  font-family: var(--display);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--pink-deep);
+  flex-shrink: 0;
+}
+
+.testimonial-person .name {
+  font-size: 0.88rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.testimonial-person .role {
+  font-size: 0.78rem;
+  color: var(--muted);
+  margin: 0;
+}
+
+/* ---------- Floating background shapes (home page only) ---------- */
+.floating-shapes {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.floating-shape {
+  position: absolute;
+  border-radius: 50%;
+}
+
+.fs-circle { background: var(--pink); opacity: 0.18; }
+.fs-sage { background: var(--sage); opacity: 0.16; }
+.fs-ring { background: transparent; border: 2px solid var(--pink-deep); opacity: 0.28; }
+.fs-square { border-radius: 18px; background: var(--pink-deep); opacity: 0.1; }
+
+@keyframes drift1 {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  50% { transform: translate(40px, -55px) rotate(14deg); }
+}
+@keyframes drift2 {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  50% { transform: translate(-40px, 50px) rotate(-16deg); }
+}
+@keyframes drift3 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(24px, 34px) scale(1.1); }
+}
+@keyframes drift4 {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  50% { transform: translate(-28px, -38px) rotate(10deg); }
+}
+
+.fs-1 { width: 260px; height: 260px; top: 4%; left: 3%; animation: drift1 24s ease-in-out infinite; }
+.fs-2 { width: 130px; height: 130px; top: 62%; left: 10%; animation: drift2 19s ease-in-out infinite; }
+.fs-3 { width: 320px; height: 320px; top: 28%; right: 4%; animation: drift3 28s ease-in-out infinite; }
+.fs-4 { width: 100px; height: 100px; top: 80%; right: 16%; animation: drift4 17s ease-in-out infinite; }
+.fs-5 { width: 170px; height: 170px; top: 2%; right: 24%; animation: drift2 22s ease-in-out infinite; }
+.fs-6 { width: 90px; height: 90px; top: 46%; left: 42%; animation: drift1 25s ease-in-out infinite; }
+.fs-7 { width: 110px; height: 110px; top: 12%; left: 55%; animation: drift4 20s ease-in-out infinite; }
+
+/* ---------- Contact section (appears at the bottom of every page) ---------- */
+.contact {
+  padding: 80px 0 90px;
+  margin-top: 40px;
+  border-top: 1px solid var(--line);
+  position: relative;
+  z-index: 1;
+}
+
+.contact-head {
+  text-align: center;
+  max-width: 520px;
+  margin: 0 auto 32px;
+}
+
+.contact-head .eyebrow {
+  font-size: 0.78rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--pink-deep);
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.contact-head h2 {
+  font-family: var(--display);
+  font-size: 1.9rem;
+  font-weight: 600;
+  margin: 0 0 12px;
+}
+
+.contact-head p {
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.contact-form {
+  max-width: 560px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-field label {
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.form-field input,
+.form-field select,
+.form-field textarea {
+  border: 1px solid var(--line);
+  background: var(--surface);
+  border-radius: 10px;
+  padding: 11px 14px;
+  font-family: var(--body);
+  font-size: 0.92rem;
+  color: var(--ink);
+}
+
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus {
+  outline: 2px solid var(--pink-deep);
+  outline-offset: 1px;
+  border-color: var(--pink-deep);
+}
+
+.contact-form textarea {
+  resize: vertical;
+}
+
+.contact-form button {
+  align-self: flex-start;
+  border: none;
+  cursor: pointer;
+}
+
+.contact-status {
+  font-size: 0.82rem;
+  color: var(--pink-deep);
+  margin: -4px 0 0;
+}
+
+/* ---------- Footer ---------- */
+.site-footer {
+  border-top: 1px solid var(--line);
+  padding: 36px 0;
+}
+
+.site-footer .wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 14px;
+  font-size: 0.84rem;
+  color: var(--muted);
+}
+
+.site-footer a { color: var(--pink-deep); font-weight: 600; }
+
+/* ---------- Mobile ---------- */
+.nav-toggle {
+  display: none;
+  justify-self: end;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+}
+.nav-toggle span,
+.nav-toggle span::before,
+.nav-toggle span::after {
+  content: '';
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--ink);
+  position: relative;
+  transition: 0.2s;
+}
+.nav-toggle span::before { position: absolute; top: -7px; }
+.nav-toggle span::after { position: absolute; top: 7px; }
+
+@media (max-width: 760px) {
+  .home-grid { grid-template-columns: 1fr; }
+  .home-tile:nth-child(even) { margin-top: 0; }
+
+  .about { grid-template-columns: 1fr; }
+  .about-photo { max-width: 220px; }
+
+  .form-row { grid-template-columns: 1fr; }
+
+  .fs-6, .fs-7 { display: none; }
+
+  .site-nav .wrap { height: 84px; }
+  .logo-mark { width: 60px; height: 60px; }
+  .logo { font-size: 1rem; }
+
+  .nav-toggle { display: block; }
+  .nav-links {
+    position: absolute;
+    top: 84px;
+    left: 0;
+    right: 0;
+    background: var(--surface);
+    border-bottom: 1px solid var(--line);
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 18px 28px 26px;
+    display: none;
+    gap: 16px;
+  }
+  .nav-links.open { display: flex; }
+  .site-nav .wrap { grid-template-columns: 1fr auto; }
+}
+
+/* ---------- Reduced motion ---------- */
+/* ---------- Scroll-driven 3D (applied via JS, progressively enhanced) ----------
+   Content blocks tip up out of the page as they scroll into view, and the
+   decorative sprigs/blobs rotate and drift with scroll for subtle depth. */
+.reveal-3d {
+  opacity: 0;
+  transform: perspective(1200px) rotateX(11deg) translateY(46px);
+  transform-origin: 50% 100%;
+  transition: opacity 0.7s ease, transform 0.85s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+.reveal-3d.in-view {
+  opacity: 1;
+  transform: perspective(1200px) rotateX(0deg) translateY(0);
+}
+
+/* Little botanical sprig flips like a coin as it passes through the viewport. */
+.sprig svg {
+  transform: perspective(500px) rotateY(var(--spin, 0deg));
+  transition: transform 0.12s linear;
+  transform-style: preserve-3d;
+  backface-visibility: visible;
+}
+
+/* Hero blobs get a gentle parallax drift + tilt on scroll. */
+.blob {
+  transform: translate3d(0, var(--py, 0px), 0) rotate(var(--pr, 0deg));
+  transition: transform 0.12s linear;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; scroll-behavior: auto !important; animation: none !important; }
+  .reveal-3d { opacity: 1 !important; transform: none !important; }
+  .sprig svg, .blob { transform: none !important; }
+}
+
+/* ---------- Focus visibility ---------- */
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--pink-deep);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ---------- Visitor "Which are you?" modal ---------- */
+body.modal-open { overflow: hidden; }
+
+.is-hidden-recruiter { display: none !important; }
+
+.visitor-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(61, 46, 34, 0.55);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+.visitor-modal.is-visible { opacity: 1; }
+
+.visitor-modal-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 40px 36px 36px;
+  max-width: 420px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 30px 60px -24px rgba(56, 48, 42, 0.5);
+  transform: translateY(14px) scale(0.98);
+  transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.visitor-modal.is-visible .visitor-modal-card {
+  transform: translateY(0) scale(1);
+}
+
+.visitor-modal-eyebrow {
+  margin: 0 0 6px;
+  color: var(--pink-deep);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.visitor-modal-card h2 {
+  margin: 0;
+  font-family: var(--display);
+  font-size: 1.9rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+.visitor-modal-sub {
+  margin: 10px 0 26px;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.visitor-modal-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.btn-visitor {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 22px;
+  border: 1px solid var(--ink);
+  border-radius: 999px;
+  background: var(--ink);
+  color: var(--surface);
+  font-family: var(--body);
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+.btn-visitor:hover {
+  background: var(--pink-deep);
+  border-color: var(--pink-deep);
+  transform: translateY(-1px);
+}
+.btn-visitor-alt {
+  background: transparent;
+  color: var(--ink);
+  border-color: var(--line);
+}
+.btn-visitor-alt:hover {
+  background: var(--bg);
+  color: var(--pink-deep);
+  border-color: var(--pink-deep);
+}
+
+/* ---------- Recruiter view switch pill ---------- */
+.visitor-switch {
+  position: fixed;
+  bottom: 18px;
+  left: 18px;
+  z-index: 900;
+  padding: 10px 16px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--muted);
+  font-family: var(--body);
+  font-size: 0.78rem;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  box-shadow: 0 14px 30px -18px rgba(56, 48, 42, 0.5);
+  transition: color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+.visitor-switch strong { color: var(--pink-deep); font-weight: 600; }
+.visitor-switch:hover {
+  color: var(--ink);
+  border-color: var(--pink-deep);
+  transform: translateY(-1px);
+}
+
+/* ===========================================================
+   Consistent side gutters
+   Several section rules use the `padding` shorthand, which was
+   wiping out .wrap's horizontal padding — so on narrow windows
+   text ran right up to the screen edge. These longhand rules
+   come last, so they restore a comfortable gutter everywhere.
+   =========================================================== */
+.wrap {
+  padding-left: 28px;
+  padding-right: 28px;
+}
+@media (max-width: 600px) {
+  .wrap { padding-left: 22px; padding-right: 22px; }
+}
+/* Header + footer bars manage their own inner padding already. */
+.site-nav .wrap,
+.site-footer .wrap {
+  padding-left: 28px;
+  padding-right: 28px;
+}
+
+/* ===========================================================
+   Interactive 3D — pointer-driven tilt on cards & tiles
+   Enhanced via JS (assets/script.js); degrades to the normal
+   hover styles when JS is off or motion is reduced.
+   =========================================================== */
+.home-grid,
+.card-grid,
+.testimonial-grid {
+  perspective: 1000px;
+}
+
+.home-tile,
+.card,
+.testimonial-card {
+  position: relative;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+/* Cursor-following sheen that sells the tilt */
+.home-tile::after,
+.card::after,
+.testimonial-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%),
+              rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0) 45%);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+  z-index: 3;
+}
+.home-tile.is-tilting::after,
+.card.is-tilting::after,
+.testimonial-card.is-tilting::after { opacity: 1; }
+
+/* Tile contents lift toward the viewer only while the tile is actively
+   tilting (on hover) — kept off at rest so they don't "hop" into place
+   after the scroll-reveal animation settles. */
+.home-tile .tile-num,
+.home-tile h2,
+.home-tile p {
+  transition: color 0.25s ease, transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.home-tile.is-tilting .tile-num { transform: translateZ(30px); }
+.home-tile.is-tilting h2 { transform: translateZ(22px); }
+.home-tile.is-tilting p { transform: translateZ(12px); }
+
+/* Ambient depth — background shapes drift with the pointer */
+.floating-shapes {
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-tile .tile-num,
+  .home-tile h2,
+  .home-tile p { transform: none !important; }
+  .floating-shapes { transform: none !important; }
+}
