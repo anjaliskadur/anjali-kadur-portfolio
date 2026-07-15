@@ -263,7 +263,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const revealSelector = [
       '.card', '.home-tile', '.page-header', '.detail-figure', '.detail-body',
       '.gallery-item', '.entry-block', '.about-photo', '.about-text', '.skills-group',
-      '.testimonial-card', '.about-resume', '.contact'
+      '.testimonial-grid .testimonial-card', '.about-resume', '.contact',
+      '.tutoring-section', '.tutoring-section-head'
     ].join(', ');
     const revealEls = Array.from(document.querySelectorAll(revealSelector));
     revealEls.forEach((el) => el.classList.add('reveal-3d'));
@@ -327,7 +328,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (!reduceMotion && finePointer) {
     const MAX_TILT = 8; // degrees
 
-    document.querySelectorAll('.home-tile, .card, .testimonial-card').forEach((el) => {
+    document.querySelectorAll('.home-tile, .card, .testimonial-grid .testimonial-card').forEach((el) => {
       let raf = 0;
       let pending = null;
 
@@ -381,6 +382,96 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  // ---------- Infinite testimonials carousel (homepage) ----------
+  (function initTestimonialMarquee() {
+    const root = document.querySelector('[data-marquee]');
+    if (!root) return;
+
+    const track = root.querySelector('.testimonial-marquee-track');
+    if (!track) return;
+
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const GAP = 24;
+    const SPEED = 38; // px per second
+
+    // Clone the original set once so the loop can hand off seamlessly.
+    const originals = Array.from(track.children);
+    originals.forEach((card) => {
+      const clone = card.cloneNode(true);
+      clone.setAttribute('aria-hidden', 'true');
+      track.appendChild(clone);
+    });
+
+    function layout() {
+      if (reduceMotion) {
+        root.classList.remove('is-ready');
+        return;
+      }
+
+      const visible = root.clientWidth < 760 ? 1 : 2;
+      const cardWidth = (root.clientWidth - GAP * (visible - 1)) / visible;
+      const count = originals.length;
+
+      track.querySelectorAll('.testimonial-card').forEach((card) => {
+        card.style.flex = '0 0 ' + cardWidth + 'px';
+        card.style.width = cardWidth + 'px';
+      });
+
+      // Exact distance from the start of set A to the start of set B
+      // (includes the gap after the last card of set A).
+      const distance = count * (cardWidth + GAP);
+      const duration = Math.max(distance / SPEED, 20);
+
+      track.style.setProperty('--marquee-distance', distance + 'px');
+      track.style.setProperty('--marquee-duration', duration + 's');
+      root.classList.add('is-ready');
+    }
+
+    layout();
+    window.addEventListener('resize', layout);
+  })();
+
+  // Pre-fill "Why are you contacting me?" from the current section.
+  // HTML also sets `selected` per page; this re-applies after form reset
+  // and covers any path quirks (local server, trailing files, etc.).
+  const CONTACT_REASON_BY_SECTION = {
+    'software-engineering': 'Software Engineering',
+    'tutoring': 'Tutoring',
+    'project-management': 'Project Management',
+    'event-planning': 'Event Planning',
+    'lighting-design': 'Lighting Design',
+    'silambam-houston': 'Silambam Houston',
+    'hobbies': 'Hobbies',
+  };
+
+  function sectionContactReason() {
+    const activeNav = document.querySelector('.nav-links a.active');
+    const haystack = [
+      window.location.pathname,
+      window.location.href,
+      activeNav ? (activeNav.getAttribute('href') || '') : '',
+    ].join(' ').toLowerCase();
+
+    for (const [slug, reason] of Object.entries(CONTACT_REASON_BY_SECTION)) {
+      if (haystack.indexOf(slug) !== -1) return reason;
+    }
+    return null;
+  }
+
+  function preselectContactReason() {
+    const select = document.getElementById('contact-reason');
+    if (!select) return;
+    const reason = sectionContactReason();
+    if (!reason) return;
+
+    Array.from(select.options).forEach((opt) => {
+      opt.selected = opt.value === reason;
+    });
+    select.value = reason;
+  }
+
+  preselectContactReason();
+
   const contactForm = document.getElementById('contact-form');
   if (contactForm) {
     const status = document.getElementById('contact-status');
@@ -410,6 +501,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (res.ok && data.success) {
           setStatus('Thanks! Your message has been sent — I\'ll get back to you soon.', 'success');
           contactForm.reset();
+          preselectContactReason();
         } else {
           setStatus(data.message || 'Something went wrong. Please try again, or email me directly.', 'error');
         }

@@ -78,7 +78,7 @@
       <div class="blob" style="width:160px;height:160px;bottom:-10px;right:-20px;background:var(--sage);opacity:0.22;"></div>
       <p class="eyebrow">Portfolio</p>
       <h1>Hi, I'm Anjali —<br><em>I build things, by hand and in code.</em></h1>
-      <p>I'm a software engineer and recent computer science graduate who also manages projects, plans events, designs lighting, and mentors students. This site brings my professional work and creative projects together in one place — the polished and the playful, side by side.</p>
+      <p>Welcome to my portfolio page, where software meets creativity. This showcases a wide range of my projects and passions — have fun exploring!</p>
     </section>
     <div class="wrap"><div class="sprig"><svg viewBox="0 0 46 22" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
   <path d="M2 11C10 11 14 5 14 1" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
@@ -154,44 +154,57 @@
   <path d="M44 11C36 11 32 5 32 1" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
   <path d="M44 11C36 11 32 17 32 21" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
 </svg></div></div>
-    <section class="testimonials wrap">
+    <section class="testimonials testimonials--marquee wrap">
       <div class="testimonials-head">
         <p class="eyebrow">Kind words</p>
         <h2>What people say</h2>
       </div>
-      <div class="testimonial-grid">
-        <div class="testimonial-card">
-          <span class="testimonial-mark">&#8220;</span>
-          <p class="testimonial-quote">Add a short quote about what it was like to work with Anjali.</p>
-          <div class="testimonial-person">
-            <div class="testimonial-avatar">CN</div>
-            <div>
-              <p class="name">Client name</p>
-              <p class="role">Role, Company</p>
+      <div class="testimonial-marquee" data-marquee role="region" aria-label="Testimonials">
+        <div class="testimonial-marquee-track">
+          <article class="testimonial-card">
+            <span class="testimonial-mark">&#8220;</span>
+            <p class="testimonial-quote">Anjali is arguably in the top 1% of students I have worked with, in terms of commitment, passion, dedication, and work ethic. She is our youngest staff member, yet one of the most reliable — quick to take initiative, eager to learn new skills, and always going well above and beyond what is asked of her.</p>
+            <div class="testimonial-person">
+              <div class="testimonial-avatar">LR</div>
+              <div>
+                <p class="name">Lavanya R.</p>
+                <p class="role">Executive Artistic Director, Silambam Houston</p>
+              </div>
             </div>
-          </div>
-        </div>
-        <div class="testimonial-card">
-          <span class="testimonial-mark">&#8220;</span>
-          <p class="testimonial-quote">Add a short quote about what it was like to work with Anjali.</p>
-          <div class="testimonial-person">
-            <div class="testimonial-avatar">CN</div>
-            <div>
-              <p class="name">Client name</p>
-              <p class="role">Role, Company</p>
+          </article>
+          <article class="testimonial-card">
+            <span class="testimonial-mark">&#8220;</span>
+            <p class="testimonial-quote">She has an exceptional work ethic and uses critical thinking and problem-solving to ensure her success in all she does. She often helped others who were struggling with their coding assignments by guiding their logical problem-solving toward the solution.</p>
+            <div class="testimonial-person">
+              <div class="testimonial-avatar">TG</div>
+              <div>
+                <p class="name">Thomas G.</p>
+                <p class="role">Educator</p>
+              </div>
             </div>
-          </div>
-        </div>
-        <div class="testimonial-card">
-          <span class="testimonial-mark">&#8220;</span>
-          <p class="testimonial-quote">Add a short quote about what it was like to work with Anjali.</p>
-          <div class="testimonial-person">
-            <div class="testimonial-avatar">CN</div>
-            <div>
-              <p class="name">Client name</p>
-              <p class="role">Role, Company</p>
+          </article>
+          <article class="testimonial-card">
+            <span class="testimonial-mark">&#8220;</span>
+            <p class="testimonial-quote">Anjali is a great Tutor. She has given support to my daughter for the past 4 years. Initially we asked for Math tutoring but her support has exceeded our expectations. She has helped my daughter with test taking preparation, organizing work and study cadence. My daughter is more confident and her grades show. She is a great teacher!</p>
+            <div class="testimonial-person">
+              <div class="testimonial-avatar">ZM</div>
+              <div>
+                <p class="name">Zeidy M.</p>
+                <p class="role">Parent of 11th grader</p>
+              </div>
             </div>
-          </div>
+          </article>
+          <article class="testimonial-card">
+            <span class="testimonial-mark">&#8220;</span>
+            <p class="testimonial-quote">She has been a great support to my daughter this past year! She is patient, intelligent, and a good communicator. I would highly recommend her as a tutor!</p>
+            <div class="testimonial-person">
+              <div class="testimonial-avatar">SR</div>
+              <div>
+                <p class="name">Sarah R.</p>
+                <p class="role">Parent of 6th grader</p>
+              </div>
+            </div>
+          </article>
         </div>
       </div>
     </section>
@@ -221,7 +234,14 @@
         <label for="contact-reason">What are you contacting me for?</label>
         <select id="contact-reason" name="reason" required>
           <option value="" disabled selected>Select a reason</option>
-          <option value="Software Engineering">Software Engineering</option><option value="Tutoring">Tutoring</option><option value="Project Management">Project Management</option><option value="Event Planning">Event Planning</option><option value="Lighting Design">Lighting Design</option><option value="Other">Other</option>
+          <option value="Software Engineering">Software Engineering</option>
+          <option value="Tutoring">Tutoring</option>
+          <option value="Project Management">Project Management</option>
+          <option value="Event Planning">Event Planning</option>
+          <option value="Lighting Design">Lighting Design</option>
+          <option value="Silambam Houston">Silambam Houston</option>
+          <option value="Hobbies">Hobbies</option>
+          <option value="Other">Other</option>
         </select>
       </div>
       <div class="form-field">

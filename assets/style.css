@@ -234,10 +234,47 @@ a { color: inherit; text-decoration: none; }
   font-size: 1.05rem;
 }
 
+.page-header p + p {
+  margin-top: 14px;
+}
+
 .page-header p a {
   color: var(--pink-deep);
   text-decoration: underline;
   text-underline-offset: 2px;
+}
+
+.page-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 26px;
+}
+
+.page-cta .btn-download {
+  margin-top: 0;
+}
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  color: var(--ink);
+  border: 1.5px solid var(--ink);
+  padding: 11px 22px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.btn-outline:hover {
+  background: var(--ink);
+  color: var(--surface);
+  transform: translateY(-1px);
 }
 
 .back-link {
@@ -896,6 +933,200 @@ a { color: inherit; text-decoration: none; }
   margin: 0 8px 8px 0;
 }
 
+/* ---------- Tutoring page ---------- */
+.tutoring-section {
+  padding: 8px 0 56px;
+}
+
+.tutoring-section > .eyebrow,
+.tutoring-section-head > .eyebrow {
+  font-size: 0.78rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--pink-deep);
+  font-weight: 600;
+  margin: 0 0 10px;
+}
+
+.tutoring-section > h2,
+.tutoring-section-head > h2 {
+  font-family: var(--display);
+  font-size: clamp(1.55rem, 3vw, 1.9rem);
+  font-weight: 600;
+  margin: 0 0 18px;
+  letter-spacing: -0.01em;
+}
+
+.tutoring-section-head {
+  max-width: 620px;
+  margin-bottom: 8px;
+}
+
+.tutoring-section-head p {
+  color: var(--muted);
+  font-size: 1.02rem;
+  margin: 0 0 8px;
+}
+
+.tutoring-subjects .card-grid {
+  padding-top: 20px;
+  padding-bottom: 56px;
+}
+
+.tutoring-prose {
+  max-width: 680px;
+}
+
+.tutoring-prose p {
+  color: var(--ink);
+  opacity: 0.88;
+  margin: 0;
+  font-size: 1.02rem;
+}
+
+.tutoring-prose p + p {
+  margin-top: 14px;
+}
+
+.tutoring-lead {
+  max-width: 620px;
+  color: var(--muted);
+  font-size: 1.02rem;
+  margin: 0 0 22px;
+}
+
+.focus-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 40px;
+  margin-top: 8px;
+  border-top: 1px solid var(--line);
+}
+
+.focus-item {
+  padding: 22px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.focus-item h3 {
+  font-family: var(--display);
+  font-size: 1.12rem;
+  font-weight: 600;
+  margin: 0 0 8px;
+}
+
+.focus-item p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.98rem;
+}
+
+.outcome-list,
+.format-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-width: 680px;
+}
+
+.outcome-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px 28px;
+}
+
+.outcome-list li,
+.format-list li {
+  position: relative;
+  padding-left: 18px;
+  color: var(--ink);
+  opacity: 0.88;
+  font-size: 1.02rem;
+}
+
+.outcome-list li::before,
+.format-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.65em;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--pink-deep);
+}
+
+.format-list li + li {
+  margin-top: 14px;
+}
+
+.format-list strong {
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.tutoring-promise .page-cta {
+  margin-top: 22px;
+}
+
+.faq-list {
+  max-width: 720px;
+  margin-top: 8px;
+  border-top: 1px solid var(--line);
+}
+
+.faq-item {
+  border-bottom: 1px solid var(--line);
+  padding: 0;
+}
+
+.faq-item summary {
+  list-style: none;
+  cursor: pointer;
+  font-family: var(--display);
+  font-size: 1.08rem;
+  font-weight: 600;
+  padding: 18px 32px 18px 0;
+  position: relative;
+  color: var(--ink);
+}
+
+.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-item summary::after {
+  content: '+';
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--pink-deep);
+  font-family: var(--body);
+  font-size: 1.25rem;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.faq-item[open] summary::after {
+  content: '–';
+}
+
+.faq-item p {
+  margin: 0 0 18px;
+  padding-right: 28px;
+  color: var(--muted);
+  font-size: 0.98rem;
+  max-width: 620px;
+}
+
+@media (max-width: 760px) {
+  .focus-list,
+  .outcome-list {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* ---------- Testimonials ---------- */
 .testimonials {
   padding: 8px 0 100px;
@@ -984,6 +1215,76 @@ a { color: inherit; text-decoration: none; }
   font-size: 0.78rem;
   color: var(--muted);
   margin: 0;
+}
+
+/* Homepage infinite testimonials carousel (right → left) */
+.testimonials--marquee {
+  overflow: hidden;
+}
+
+.testimonials--marquee .testimonials-head {
+  margin-bottom: 36px;
+}
+
+.testimonial-marquee {
+  overflow: hidden;
+  width: 100%;
+}
+
+.testimonial-marquee-track {
+  display: flex;
+  align-items: stretch;
+  gap: 24px;
+  width: max-content;
+  will-change: transform;
+}
+
+.testimonial-marquee.is-ready .testimonial-marquee-track {
+  animation: testimonial-marquee-scroll var(--marquee-duration, 45s) linear infinite;
+}
+
+.testimonial-marquee:hover .testimonial-marquee-track,
+.testimonial-marquee:focus-within .testimonial-marquee-track {
+  animation-play-state: paused;
+}
+
+.testimonials--marquee .testimonial-card {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  /* Avoid fighting the track animation with 3D tilt styles */
+  transform: none !important;
+  transform-style: flat;
+  will-change: auto;
+}
+
+.testimonials--marquee .testimonial-card::after {
+  display: none;
+}
+
+.testimonials--marquee .testimonial-quote {
+  flex: 1;
+}
+
+@keyframes testimonial-marquee-scroll {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(calc(-1 * var(--marquee-distance, 0px)), 0, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .testimonial-marquee.is-ready .testimonial-marquee-track {
+    animation: none;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+  .testimonial-marquee-track .testimonial-card[aria-hidden="true"] {
+    display: none;
+  }
+  .testimonials--marquee .testimonial-card {
+    flex: 1 1 calc(50% - 12px);
+    min-width: 260px;
+    width: auto !important;
+  }
 }
 
 /* ---------- Floating background shapes (home page only) ---------- */

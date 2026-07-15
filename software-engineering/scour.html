@@ -13,7 +13,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Scour — Anjali Kadur</title>
-<meta name="description" content="AI-powered furniture discovery platform — admin tooling, SEO, and storefront content.">
+<meta name="description" content="Scour — Ruby on Rails furniture discovery platform. OpenAI-powered admin notes, store bios, SEO-friendly URLs, and storefront fixes. Frontend: HTML, CSS, JavaScript, Tailwind.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;0,600;1,500&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
@@ -46,16 +46,17 @@
     <section class="detail wrap">
       <a class="back-link" href="./">&#8592; Back to Software Engineering Projects</a>
       <div class="entries-header">
-        <div><span class="tag">Startup</span><span class="tag">Full-Stack</span></div>
+        <div><span class="tag">Ruby on Rails</span><span class="tag">OpenAI</span><span class="tag">Tailwind</span><span class="tag">Full-Stack</span></div>
         <h2>Scour</h2>
+        <p>Scour is an AI-powered furniture discovery platform (<a href="https://scour.design" target="_blank" rel="noopener">scour.design</a>) with 660K+ listings from boutiques worldwide. I worked in a Ruby on Rails codebase with an HTML, CSS, JavaScript, and Tailwind frontend — shipping admin tooling, AI-assisted content, SEO-friendly URLs, and storefront reliability fixes.</p>
       </div>
     </section>
     <section class="entries wrap">
       <div class="entry-block">
-      <div class="detail-figure has-image"><img src="../assets/img/01%20-%20software%20engineering/scour/scour-admin-notes.png" alt="Admin & Product Notes"></div>
+      <div class="detail-figure has-image"><img src="../assets/img/01%20-%20software%20engineering/scour/scour-admin-notes.png" alt="Admin product page with OpenAI-powered Admin Notes panel"></div>
       <div class="entry-body">
-        <h3>Admin & Product Notes</h3>
-        <p class="placeholder-note">Add your description here.</p>
+        <h3>Admin &amp; Product Notes</h3>
+        <p>Built an <strong>Admin Notes</strong> panel on product detail pages in the Rails admin, so the team can capture operational context next to listing metadata — title, store, pricing, curator status, and feed health. Notes are powered by the <strong>OpenAI API</strong>, making it faster to draft and attach useful product notes without leaving the admin.</p>
       </div>
     </div>
       <div class="wrap"><div class="sprig"><svg viewBox="0 0 46 22" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -66,10 +67,10 @@
   <path d="M44 11C36 11 32 17 32 21" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
 </svg></div></div>
       <div class="entry-block">
-      <div class="detail-figure has-image"><img src="../assets/img/01%20-%20software%20engineering/scour/scour-store-bios.png" alt="Store Bios"></div>
+      <div class="detail-figure has-image"><img src="../assets/img/01%20-%20software%20engineering/scour/scour-store-bios.png" alt="Store admin page for Pinch with Regenerate Bio action"></div>
       <div class="entry-body">
         <h3>Store Bios</h3>
-        <p class="placeholder-note">Add your description here.</p>
+        <p>Expanded store admin pages with editorial <strong>bios</strong> for boutique partners — short brand narratives that sit alongside shipping regions, curator status, and editor’s-pick flags. Added a <strong>Regenerate Bio</strong> action so the team can refresh store copy in one click instead of rewriting descriptions by hand (shown: Pinch).</p>
       </div>
     </div>
       <div class="wrap"><div class="sprig"><svg viewBox="0 0 46 22" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -80,10 +81,10 @@
   <path d="M44 11C36 11 32 17 32 21" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
 </svg></div></div>
       <div class="entry-block">
-      <div class="detail-figure has-image"><img src="../assets/img/01%20-%20software%20engineering/scour/scour-friendly-urls.png" alt="Friendly URLs"></div>
+      <div class="detail-figure has-image"><img src="../assets/img/01%20-%20software%20engineering/scour/scour-friendly-urls.png" alt="Scour storefront product detail with searchable catalog of 667K+ items"></div>
       <div class="entry-body">
         <h3>Friendly URLs</h3>
-        <p class="placeholder-note">Add your description here.</p>
+        <p>Shipped <strong>SEO-friendly URLs</strong> on the customer-facing storefront so product pages resolve to readable, shareable paths instead of opaque IDs. That work sits behind the discovery experience shoppers see — category filters, a 660K+ item search, product detail, visit-store CTAs, and related products — and helps listings stay findable and linkable.</p>
       </div>
     </div>
       <div class="wrap"><div class="sprig"><svg viewBox="0 0 46 22" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -94,10 +95,10 @@
   <path d="M44 11C36 11 32 17 32 21" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
 </svg></div></div>
       <div class="entry-block">
-      <div class="detail-figure has-image"><img src="../assets/img/01%20-%20software%20engineering/scour/scour-pagination.png" alt="Pagination Fix"></div>
+      <div class="detail-figure has-image"><img src="../assets/img/01%20-%20software%20engineering/scour/scour-pagination.png" alt="Users admin table with working pagination controls"></div>
       <div class="entry-body">
         <h3>Pagination Fix</h3>
-        <p class="placeholder-note">Add your description here.</p>
+        <p>Fixed broken <strong>pagination</strong> on admin list views so large tables page correctly through the full dataset. Shown on the Users index — email, status flags, and edit actions — with page controls that reliably move between result sets instead of stalling or skipping rows.</p>
       </div>
     </div>
     </section>
@@ -126,8 +127,15 @@
       <div class="form-field">
         <label for="contact-reason">What are you contacting me for?</label>
         <select id="contact-reason" name="reason" required>
-          <option value="" disabled selected>Select a reason</option>
-          <option value="Software Engineering">Software Engineering</option><option value="Tutoring">Tutoring</option><option value="Project Management">Project Management</option><option value="Event Planning">Event Planning</option><option value="Lighting Design">Lighting Design</option><option value="Other">Other</option>
+          <option value="" disabled>Select a reason</option>
+          <option value="Software Engineering" selected>Software Engineering</option>
+          <option value="Tutoring">Tutoring</option>
+          <option value="Project Management">Project Management</option>
+          <option value="Event Planning">Event Planning</option>
+          <option value="Lighting Design">Lighting Design</option>
+          <option value="Silambam Houston">Silambam Houston</option>
+          <option value="Hobbies">Hobbies</option>
+          <option value="Other">Other</option>
         </select>
       </div>
       <div class="form-field">
