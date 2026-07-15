@@ -383,48 +383,20 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ---------- Infinite testimonials carousel (homepage) ----------
+  // CSS handles the -50% loop; JS only sizes cards to fit ~2 across.
   (function initTestimonialMarquee() {
     const root = document.querySelector('[data-marquee]');
     if (!root) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-    const track = root.querySelector('.testimonial-marquee-track');
-    if (!track) return;
-
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const GAP = 24;
-    const SPEED = 38; // px per second
-
-    // Clone the original set once so the loop can hand off seamlessly.
-    const originals = Array.from(track.children);
-    originals.forEach((card) => {
-      const clone = card.cloneNode(true);
-      clone.setAttribute('aria-hidden', 'true');
-      track.appendChild(clone);
-    });
 
     function layout() {
-      if (reduceMotion) {
-        root.classList.remove('is-ready');
-        return;
-      }
-
       const visible = root.clientWidth < 760 ? 1 : 2;
-      const cardWidth = (root.clientWidth - GAP * (visible - 1)) / visible;
-      const count = originals.length;
-
-      track.querySelectorAll('.testimonial-card').forEach((card) => {
-        card.style.flex = '0 0 ' + cardWidth + 'px';
+      const cardWidth = Math.floor((root.clientWidth - GAP * (visible - 1)) / visible);
+      root.querySelectorAll('.testimonial-card').forEach((card) => {
         card.style.width = cardWidth + 'px';
       });
-
-      // Exact distance from the start of set A to the start of set B
-      // (includes the gap after the last card of set A).
-      const distance = count * (cardWidth + GAP);
-      const duration = Math.max(distance / SPEED, 20);
-
-      track.style.setProperty('--marquee-distance', distance + 'px');
-      track.style.setProperty('--marquee-duration', duration + 's');
-      root.classList.add('is-ready');
     }
 
     layout();

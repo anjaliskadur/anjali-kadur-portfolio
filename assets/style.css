@@ -1225,7 +1225,9 @@ a.btn-outline:hover {
   margin: 0;
 }
 
-/* Homepage infinite testimonials carousel (right → left) */
+/* Homepage infinite testimonials carousel (right → left).
+   Two identical groups; track translates -50% for a seamless loop.
+   Works without JS; JS only sizes cards to the section width. */
 .testimonials--marquee {
   overflow: hidden;
 }
@@ -1241,14 +1243,9 @@ a.btn-outline:hover {
 
 .testimonial-marquee-track {
   display: flex;
-  align-items: stretch;
-  gap: 24px;
   width: max-content;
   will-change: transform;
-}
-
-.testimonial-marquee.is-ready .testimonial-marquee-track {
-  animation: testimonial-marquee-scroll var(--marquee-duration, 45s) linear infinite;
+  animation: testimonial-marquee-scroll 45s linear infinite;
 }
 
 .testimonial-marquee:hover .testimonial-marquee-track,
@@ -1256,11 +1253,19 @@ a.btn-outline:hover {
   animation-play-state: paused;
 }
 
+.testimonial-marquee-group {
+  display: flex;
+  align-items: stretch;
+  gap: 24px;
+  padding-right: 24px;
+  flex-shrink: 0;
+}
+
 .testimonials--marquee .testimonial-card {
   flex: 0 0 auto;
+  width: min(480px, 78vw);
   display: flex;
   flex-direction: column;
-  /* Avoid fighting the track animation with 3D tilt styles */
   transform: none !important;
   transform-style: flat;
   will-change: auto;
@@ -1276,22 +1281,36 @@ a.btn-outline:hover {
 
 @keyframes testimonial-marquee-scroll {
   from { transform: translate3d(0, 0, 0); }
-  to   { transform: translate3d(calc(-1 * var(--marquee-distance, 0px)), 0, 0); }
+  to   { transform: translate3d(-50%, 0, 0); }
+}
+
+@media (max-width: 760px) {
+  .testimonials--marquee .testimonial-card {
+    width: min(340px, 85vw);
+  }
+  .testimonial-marquee-track {
+    animation-duration: 35s;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .testimonial-marquee.is-ready .testimonial-marquee-track {
+  .testimonial-marquee-track {
     animation: none;
     flex-wrap: wrap;
     width: 100%;
   }
-  .testimonial-marquee-track .testimonial-card[aria-hidden="true"] {
+  .testimonial-marquee-group {
+    flex-wrap: wrap;
+    padding-right: 0;
+    width: 100%;
+  }
+  .testimonial-marquee-group[aria-hidden="true"] {
     display: none;
   }
   .testimonials--marquee .testimonial-card {
     flex: 1 1 calc(50% - 12px);
+    width: auto;
     min-width: 260px;
-    width: auto !important;
   }
 }
 
