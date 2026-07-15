@@ -328,7 +328,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (!reduceMotion && finePointer) {
     const MAX_TILT = 8; // degrees
 
-    document.querySelectorAll('.home-tile, .card, .testimonial-grid .testimonial-card').forEach((el) => {
+    document.querySelectorAll('.home-tile, .card:not(.card--static), .testimonial-grid .testimonial-card').forEach((el) => {
       let raf = 0;
       let pending = null;
 
@@ -383,15 +383,17 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ---------- Infinite testimonials carousel (homepage) ----------
-  // CSS handles the -50% loop; JS only sizes cards to fit ~2 across.
+  // CSS handles the -50% loop; JS sizes cards and opens a read modal on tap.
   (function initTestimonialMarquee() {
     const root = document.querySelector('[data-marquee]');
     if (!root) return;
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
+    const track = root.querySelector('.testimonial-marquee-track');
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const GAP = 24;
 
     function layout() {
+      if (reduceMotion) return;
       const visible = root.clientWidth < 760 ? 1 : 2;
       const cardWidth = Math.floor((root.clientWidth - GAP * (visible - 1)) / visible);
       root.querySelectorAll('.testimonial-card').forEach((card) => {
@@ -401,6 +403,101 @@ document.addEventListener('DOMContentLoaded', () => {
 
     layout();
     window.addEventListener('resize', layout);
+
+    // Tap/click a card → open full quote; close → resume scroll
+    let modal = null;
+    let closeTimer = null;
+
+    function pauseMarquee() {
+      if (track) track.style.animationPlayState = 'paused';
+    }
+
+    function resumeMarquee() {
+      if (track && !reduceMotion) track.style.animationPlayState = '';
+    }
+
+    function teardownModal() {
+      if (closeTimer) {
+        clearTimeout(closeTimer);
+        closeTimer = null;
+      }
+      if (!modal) return;
+      if (modal.parentNode) modal.parentNode.removeChild(modal);
+      modal = null;
+      document.body.classList.remove('modal-open');
+    }
+
+    function closeModal() {
+      if (!modal) return;
+      modal.classList.remove('is-visible');
+      const el = modal;
+      modal = null;
+      document.body.classList.remove('modal-open');
+      closeTimer = window.setTimeout(() => {
+        if (el.parentNode) el.parentNode.removeChild(el);
+        if (!modal) resumeMarquee();
+        closeTimer = null;
+      }, 220);
+    }
+
+    function openModal(card) {
+      const quote = (card.querySelector('.testimonial-quote') || {}).textContent || '';
+      const name = (card.querySelector('.name') || {}).textContent || '';
+      const role = (card.querySelector('.role') || {}).textContent || '';
+      const avatar = (card.querySelector('.testimonial-avatar') || {}).textContent || '';
+
+      teardownModal();
+      pauseMarquee();
+
+      modal = document.createElement('div');
+      modal.className = 'testimonial-modal';
+      modal.setAttribute('role', 'dialog');
+      modal.setAttribute('aria-modal', 'true');
+      modal.setAttribute('aria-label', 'Testimonial');
+      modal.innerHTML =
+        '<div class="testimonial-modal-card">' +
+        '  <button type="button" class="testimonial-modal-close" aria-label="Close">&times;</button>' +
+        '  <span class="testimonial-mark">&#8220;</span>' +
+        '  <p class="testimonial-modal-quote"></p>' +
+        '  <div class="testimonial-person">' +
+        '    <div class="testimonial-avatar"></div>' +
+        '    <div><p class="name"></p><p class="role"></p></div>' +
+        '  </div>' +
+        '  <button type="button" class="btn-download testimonial-modal-done">Back to scrolling</button>' +
+        '</div>';
+
+      modal.querySelector('.testimonial-modal-quote').textContent = quote.trim();
+      modal.querySelector('.testimonial-avatar').textContent = avatar.trim();
+      modal.querySelector('.name').textContent = name.trim();
+      modal.querySelector('.role').textContent = role.trim();
+
+      document.body.appendChild(modal);
+      document.body.classList.add('modal-open');
+      requestAnimationFrame(() => { if (modal) modal.classList.add('is-visible'); });
+
+      modal.querySelector('.testimonial-modal-close').addEventListener('click', closeModal);
+      modal.querySelector('.testimonial-modal-done').addEventListener('click', closeModal);
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+      });
+    }
+
+    root.querySelectorAll('.testimonial-card').forEach((card) => {
+      card.setAttribute('tabindex', '0');
+      card.setAttribute('role', 'button');
+      card.setAttribute('aria-label', 'Read full testimonial');
+      card.addEventListener('click', () => openModal(card));
+      card.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          openModal(card);
+        }
+      });
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal) closeModal();
+    });
   })();
 
   // Pre-fill "Why are you contacting me?" from the current section.
