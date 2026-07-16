@@ -20,10 +20,11 @@
 <link rel="icon" href="../favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="../assets/img/favicon/favicon-32.png">
 <link rel="apple-touch-icon" href="../assets/img/favicon/apple-touch-icon.png">
-<link rel="stylesheet" href="../assets/style.css?v=20260715f">
+<link rel="stylesheet" href="../assets/style.css?v=20260715g">
 </head>
 <body>
 
+<a class="skip-link" href="#main">Skip to content</a>
 <header class="site-nav">
     <div class="wrap">
       <a class="logo" href="../">
@@ -42,7 +43,7 @@
       <button class="nav-toggle" aria-label="Toggle navigation"><span></span></button>
     </div>
   </header>
-<main>
+<main id="main">
     <section class="detail wrap">
       <a class="back-link" href="./">&#8592; Back to Software Engineering Projects</a>
       <div class="entries-header">
@@ -53,7 +54,7 @@
     </section>
     <section class="entries wrap">
       <div class="entry-block">
-      <div class="detail-figure"><span>Drop a screenshot or photo here</span></div>
+      <div class="detail-figure has-image"><img src="../assets/img/01%20-%20software%20engineering/scour/scour-admin-notes.png" alt="Scour admin tooling surfaced through MCP catalog tools" loading="lazy" decoding="async"></div>
       <div class="entry-body">
         <h3>Scour MCP Integration</h3>
         <p>Validated MCP server integration enabling LLM clients to query 668K+ furniture listings from 500+ global boutiques through 6 read-only API tools, verifying OAuth 2.1 authentication, admin-gated access, and catalog search workflows in Claude Desktop.</p>
@@ -94,11 +95,11 @@
 <div class="form-row">
         <div class="form-field">
           <label for="contact-name">Name</label>
-          <input type="text" id="contact-name" name="name" required>
+          <input type="text" id="contact-name" name="name" autocomplete="name" required>
         </div>
         <div class="form-field">
           <label for="contact-email">Email</label>
-          <input type="email" id="contact-email" name="email" required>
+          <input type="email" id="contact-email" name="email" autocomplete="email" required>
         </div>
       </div>
       <div class="form-field">
@@ -127,9 +128,9 @@
 <footer class="site-footer">
     <div class="wrap">
       <span>&copy; 2026 Anjali Kadur</span>
-      <a href="#">Back to top &#8594;</a>
+      <a href="#main">Back to top &#8594;</a>
     </div>
   </footer>
-<script src="../assets/script.js?v=20260715f"></script>
+<script src="../assets/script.js?v=20260715g"></script>
 </body>
 </html>

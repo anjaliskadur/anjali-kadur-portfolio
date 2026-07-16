@@ -20,10 +20,11 @@
 <link rel="icon" href="../favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="../assets/img/favicon/favicon-32.png">
 <link rel="apple-touch-icon" href="../assets/img/favicon/apple-touch-icon.png">
-<link rel="stylesheet" href="../assets/style.css?v=20260715f">
+<link rel="stylesheet" href="../assets/style.css?v=20260715g">
 </head>
 <body>
 
+<a class="skip-link" href="#main">Skip to content</a>
 <header class="site-nav">
     <div class="wrap">
       <a class="logo" href="../">
@@ -42,7 +43,7 @@
       <button class="nav-toggle" aria-label="Toggle navigation"><span></span></button>
     </div>
   </header>
-<main>
+<main id="main">
     <section class="page-header wrap">
       <p class="eyebrow">01 — About</p>
       <h1>Bio</h1>
@@ -60,6 +61,7 @@
         <div class="social-links">
           <a class="social-link" href="https://github.com/anjaliskadur" target="_blank" rel="noopener">GitHub &#8599;</a>
           <a class="social-link" href="https://www.linkedin.com/in/anjalikadur" target="_blank" rel="noopener">LinkedIn &#8599;</a>
+          <a class="social-link" href="https://www.instagram.com/anjali.kadur" target="_blank" rel="noopener">Instagram &#8599;</a>
         </div>
         <div class="about-resume">
           <a class="btn-download" href="../assets/resume.pdf" download>&#8595; Download Resume (PDF)</a>
@@ -109,7 +111,7 @@
     <div class="contact-head">
       <p class="eyebrow">Get in touch</p>
       <h2>Contact Me</h2>
-      <p>Have a project in mind, or just want to say hi? Fill this out and it'll land straight in my inbox.</p>
+      <p>Want to work together or just say hello? Send a note — it lands straight in my inbox.</p>
     </div>
     <form class="contact-form" id="contact-form" action="https://api.web3forms.com/submit" method="POST">
       <input type="hidden" name="access_key" value="4b983313-cbaf-47f9-bd89-0d7f810e0e13">
@@ -119,11 +121,11 @@
 <div class="form-row">
         <div class="form-field">
           <label for="contact-name">Name</label>
-          <input type="text" id="contact-name" name="name" required>
+          <input type="text" id="contact-name" name="name" autocomplete="name" required>
         </div>
         <div class="form-field">
           <label for="contact-email">Email</label>
-          <input type="email" id="contact-email" name="email" required>
+          <input type="email" id="contact-email" name="email" autocomplete="email" required>
         </div>
       </div>
       <div class="form-field">
@@ -152,9 +154,9 @@
 <footer class="site-footer">
     <div class="wrap">
       <span>&copy; 2026 Anjali Kadur</span>
-      <a href="#">Back to top &#8594;</a>
+      <a href="#main">Back to top &#8594;</a>
     </div>
   </footer>
-<script src="../assets/script.js?v=20260715f"></script>
+<script src="../assets/script.js?v=20260715g"></script>
 </body>
 </html>

@@ -65,6 +65,11 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
 
+    function choose(type) {
+      try { localStorage.setItem(STORAGE_KEY, type); } catch (e) {}
+      applyMode(type);
+    }
+
     function showModal() {
       const overlay = document.createElement('div');
       overlay.className = 'visitor-modal';
@@ -85,15 +90,41 @@ document.addEventListener('DOMContentLoaded', () => {
       document.body.classList.add('modal-open');
       requestAnimationFrame(() => overlay.classList.add('is-visible'));
 
+      const focusables = () => Array.from(overlay.querySelectorAll('button'));
+      const firstBtn = overlay.querySelector('.btn-visitor');
+      if (firstBtn) firstBtn.focus();
+
+      function closeAndChoose(type) {
+        overlay.classList.remove('is-visible');
+        document.body.classList.remove('modal-open');
+        setTimeout(() => overlay.remove(), 250);
+        choose(type);
+        document.removeEventListener('keydown', onKey);
+      }
+
+      function onKey(e) {
+        if (e.key === 'Escape') {
+          e.preventDefault();
+          closeAndChoose('explorer');
+          return;
+        }
+        if (e.key !== 'Tab') return;
+        const list = focusables();
+        if (!list.length) return;
+        const first = list[0];
+        const last = list[list.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
+      document.addEventListener('keydown', onKey);
+
       overlay.querySelectorAll('.btn-visitor').forEach((btn) => {
-        btn.addEventListener('click', () => {
-          const type = btn.getAttribute('data-type');
-          try { localStorage.setItem(STORAGE_KEY, type); } catch (e) {}
-          overlay.classList.remove('is-visible');
-          document.body.classList.remove('modal-open');
-          setTimeout(() => overlay.remove(), 250);
-          applyMode(type);
-        });
+        btn.addEventListener('click', () => closeAndChoose(btn.getAttribute('data-type')));
       });
     }
 
@@ -107,9 +138,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   })();
 
-  // ---------- Lighting Design: under construction notice ----------
+  // ---------- Lighting Design: under construction notice (once per session) ----------
   (function lightingDesignConstruction() {
     if (!/\/lighting-design(\/|$)/.test(window.location.pathname)) return;
+    const SEEN_KEY = 'lightingConstructionSeen';
+    try {
+      if (sessionStorage.getItem(SEEN_KEY) === '1') return;
+    } catch (e) {}
 
     function showConstructionModal() {
       if (document.querySelector('.construction-modal')) return;
@@ -130,10 +165,23 @@ document.addEventListener('DOMContentLoaded', () => {
         '  </div>' +
         '</div>';
 
+      function markSeen() {
+        try { sessionStorage.setItem(SEEN_KEY, '1'); } catch (e) {}
+      }
+
       function closeModal() {
+        markSeen();
         overlay.classList.remove('is-visible');
         document.body.classList.remove('modal-open');
         setTimeout(() => overlay.remove(), 250);
+        document.removeEventListener('keydown', onKey);
+      }
+
+      function onKey(e) {
+        if (e.key === 'Escape') {
+          e.preventDefault();
+          closeModal();
+        }
       }
 
       overlay.addEventListener('click', (e) => {
@@ -142,25 +190,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
       overlay.querySelector('[data-action="dismiss"]').addEventListener('click', closeModal);
       overlay.querySelector('[data-action="home"]').addEventListener('click', () => {
+        markSeen();
         const logo = document.querySelector('.logo');
         window.location.href = (logo && logo.getAttribute('href')) || '../';
       });
 
-      document.addEventListener('keydown', function onKey(e) {
-        if (e.key === 'Escape') {
-          closeModal();
-          document.removeEventListener('keydown', onKey);
-        }
-      });
+      document.addEventListener('keydown', onKey);
 
       document.body.appendChild(overlay);
       document.body.classList.add('modal-open');
-      requestAnimationFrame(() => overlay.classList.add('is-visible'));
+      requestAnimationFrame(() => {
+        overlay.classList.add('is-visible');
+        const btn = overlay.querySelector('[data-action="dismiss"]');
+        if (btn) btn.focus();
+      });
     }
 
     if (document.querySelector('.visitor-modal')) {
       const observer = new MutationObserver(() => {
-        if (!document.querySelector('.visitor-modal')) {
+        if (!document.querySelector('.visitor-modal:not(.construction-modal)')) {
           observer.disconnect();
           showConstructionModal();
         }
@@ -174,8 +222,34 @@ document.addEventListener('DOMContentLoaded', () => {
   const toggle = document.querySelector('.nav-toggle');
   const links = document.querySelector('.nav-links');
   if (toggle && links) {
+    if (!links.id) links.id = 'site-nav-links';
+    toggle.setAttribute('aria-controls', links.id);
+    toggle.setAttribute('aria-expanded', 'false');
+
+    function setNavOpen(open) {
+      links.classList.toggle('open', open);
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    }
+
     toggle.addEventListener('click', () => {
-      links.classList.toggle('open');
+      setNavOpen(!links.classList.contains('open'));
+    });
+
+    links.querySelectorAll('a').forEach((a) => {
+      a.addEventListener('click', () => setNavOpen(false));
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && links.classList.contains('open')) {
+        setNavOpen(false);
+        toggle.focus();
+      }
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!links.classList.contains('open')) return;
+      if (links.contains(e.target) || toggle.contains(e.target)) return;
+      setNavOpen(false);
     });
   }
 
@@ -198,6 +272,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.classList.add('nav-collapsed');
       } else if (wasCollapsed) {
         links.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
       }
     };
 
@@ -214,12 +289,28 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  const reduceMotionEarly = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
   document.querySelectorAll('.carousel').forEach((carousel, carouselIndex) => {
     const track = carousel.querySelector('.carousel-track');
     const slides = track ? Array.from(track.children) : [];
     if (!track || slides.length <= 1) return;
 
+    // Lazy-load slides after the first so hubs don't fetch every frame at once.
+    slides.forEach((slide, i) => {
+      const img = slide.querySelector('img');
+      if (!img) return;
+      if (i === 0) {
+        if (carouselIndex < 2) img.setAttribute('fetchpriority', 'high');
+      } else {
+        img.loading = 'lazy';
+        img.decoding = 'async';
+      }
+    });
+
     let index = 0;
+    let timer = null;
+    let inView = false;
     const dots = carousel.querySelectorAll('.carousel-dot');
     const prevBtn = carousel.querySelector('.carousel-btn.prev');
     const nextBtn = carousel.querySelector('.carousel-btn.next');
@@ -245,19 +336,36 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
 
-    if (carousel.dataset.autoplay === 'true') {
-      // Vary interval + start delay per carousel so previews don't all flip in unison.
+    function stopAutoplay() {
+      if (timer) {
+        clearInterval(timer);
+        timer = null;
+      }
+    }
+
+    function startAutoplay() {
+      if (reduceMotionEarly || carousel.dataset.autoplay !== 'true' || !inView || timer) return;
       const interval = 3000 + (carouselIndex % 5) * 450;
-      const startDelay = 900 + ((carouselIndex * 1100) % interval);
-      setTimeout(() => {
-        go(1);
-        setInterval(() => go(1), interval);
-      }, startDelay);
+      timer = setInterval(() => go(1), interval);
+    }
+
+    if (carousel.dataset.autoplay === 'true' && !reduceMotionEarly && 'IntersectionObserver' in window) {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          inView = entry.isIntersecting;
+          if (inView) startAutoplay();
+          else stopAutoplay();
+        });
+      }, { threshold: 0.35 });
+      io.observe(carousel);
+    } else if (carousel.dataset.autoplay === 'true' && !reduceMotionEarly) {
+      inView = true;
+      startAutoplay();
     }
   });
 
   // ---------- Scroll-driven 3D effects ----------
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const reduceMotion = reduceMotionEarly;
   if (!reduceMotion && 'IntersectionObserver' in window) {
     // 1) Content blocks tip up into place as they enter the viewport.
     const revealSelector = [
@@ -617,10 +725,10 @@ document.addEventListener('DOMContentLoaded', () => {
           contactForm.reset();
           preselectContactReason();
         } else {
-          setStatus(data.message || 'Something went wrong. Please try again, or email me directly.', 'error');
+          setStatus(data.message || 'Something went wrong. Please try again in a moment.', 'error');
         }
       } catch (err) {
-        setStatus('Network error — please try again, or email me directly.', 'error');
+        setStatus('Network error — please check your connection and try again.', 'error');
       } finally {
         if (submitBtn) submitBtn.disabled = false;
       }

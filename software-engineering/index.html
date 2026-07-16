@@ -20,10 +20,11 @@
 <link rel="icon" href="../favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="../assets/img/favicon/favicon-32.png">
 <link rel="apple-touch-icon" href="../assets/img/favicon/apple-touch-icon.png">
-<link rel="stylesheet" href="../assets/style.css?v=20260715f">
+<link rel="stylesheet" href="../assets/style.css?v=20260715g">
 </head>
 <body>
 
+<a class="skip-link" href="#main">Skip to content</a>
 <header class="site-nav">
     <div class="wrap">
       <a class="logo" href="../">
@@ -42,7 +43,7 @@
       <button class="nav-toggle" aria-label="Toggle navigation"><span></span></button>
     </div>
   </header>
-<main>
+<main id="main">
     <section class="page-header wrap">
       <p class="eyebrow">02 — Build & Ship</p>
       <h1>Software Engineering Projects</h1>
@@ -89,7 +90,7 @@
           </div>
         </a>
         <a class="card" href="pacman-game.html">
-          <div class="card-thumb"><span>Add screenshot</span></div>
+          <div class="card-thumb has-image thumb-pacman"><span>Pacman AI</span></div>
           <div class="card-body">
             <h3>Pacman Game</h3>
             <p>A Pacman AI project using probabilistic inference to track ghosts through hidden state.</p>
@@ -102,7 +103,7 @@
     <div class="contact-head">
       <p class="eyebrow">Get in touch</p>
       <h2>Contact Me</h2>
-      <p>Have a project in mind, or just want to say hi? Fill this out and it'll land straight in my inbox.</p>
+      <p>Looking for a software engineer who ships? Tell me about the role or project — I read every note.</p>
     </div>
     <form class="contact-form" id="contact-form" action="https://api.web3forms.com/submit" method="POST">
       <input type="hidden" name="access_key" value="4b983313-cbaf-47f9-bd89-0d7f810e0e13">
@@ -112,11 +113,11 @@
 <div class="form-row">
         <div class="form-field">
           <label for="contact-name">Name</label>
-          <input type="text" id="contact-name" name="name" required>
+          <input type="text" id="contact-name" name="name" autocomplete="name" required>
         </div>
         <div class="form-field">
           <label for="contact-email">Email</label>
-          <input type="email" id="contact-email" name="email" required>
+          <input type="email" id="contact-email" name="email" autocomplete="email" required>
         </div>
       </div>
       <div class="form-field">
@@ -145,9 +146,9 @@
 <footer class="site-footer">
     <div class="wrap">
       <span>&copy; 2026 Anjali Kadur</span>
-      <a href="#">Back to top &#8594;</a>
+      <a href="#main">Back to top &#8594;</a>
     </div>
   </footer>
-<script src="../assets/script.js?v=20260715f"></script>
+<script src="../assets/script.js?v=20260715g"></script>
 </body>
 </html>
