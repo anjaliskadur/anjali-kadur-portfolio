@@ -996,6 +996,42 @@ a.btn-outline:hover {
 }
 
 /* ---------- Tutoring page ---------- */
+.page-tutoring .page-header,
+.page-tutoring .tutoring-section,
+.page-tutoring .testimonials-head,
+.page-tutoring .contact-head {
+  text-align: center;
+}
+
+.page-tutoring .page-header p,
+.page-tutoring .tutoring-section-head,
+.page-tutoring .tutoring-prose,
+.page-tutoring .tutoring-lead,
+.page-tutoring .faq-list {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.page-tutoring .outcome-list,
+.page-tutoring .format-list,
+.page-tutoring .focus-list {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+}
+
+.page-tutoring .page-cta {
+  justify-content: center;
+}
+
+.page-tutoring .tutoring-section > .eyebrow,
+.page-tutoring .tutoring-section-head > .eyebrow,
+.page-tutoring .tutoring-section > h2,
+.page-tutoring .tutoring-section-head > h2 {
+  text-align: center;
+}
+
 .tutoring-section {
   padding: 8px 0 56px;
 }
@@ -1300,6 +1336,38 @@ a.btn-outline:hover {
   width: max-content;
   will-change: transform;
   transform: translate3d(0, 0, 0);
+}
+
+/* Phone: native horizontal swipe instead of auto-scroll */
+.testimonial-marquee.is-swipe {
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: max(16px, calc((100% - min(340px, 85vw)) / 2));
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+}
+.testimonial-marquee.is-swipe::-webkit-scrollbar {
+  display: none;
+}
+.testimonial-marquee.is-swipe .testimonial-marquee-track {
+  transform: none !important;
+  will-change: auto;
+  gap: 0;
+}
+.testimonial-marquee.is-swipe .testimonial-marquee-group[aria-hidden="true"] {
+  display: none;
+}
+.testimonial-marquee.is-swipe .testimonial-marquee-group {
+  padding-right: 0;
+  gap: 16px;
+  padding-inline: max(16px, calc((100% - min(340px, 85vw)) / 2));
+}
+.testimonial-marquee.is-swipe .testimonial-card {
+  width: min(340px, 85vw);
+  scroll-snap-align: center;
+  flex-shrink: 0;
 }
 
 .testimonial-marquee-group {

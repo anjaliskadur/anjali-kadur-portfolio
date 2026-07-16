@@ -491,7 +491,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ---------- Infinite testimonials carousel (homepage) ----------
-  // JS-driven translate for reliable pause/resume on mobile (CSS animation-play-state sticks after tap).
+  // Desktop: continuous marquee. Phone: native horizontal swipe (auto-scroll is unreliable on mobile).
   (function initTestimonialMarquee() {
     const root = document.querySelector('[data-marquee]');
     if (!root) return;
@@ -500,9 +500,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!track) return;
 
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const mobileMq = window.matchMedia('(max-width: 759px)');
     const GAP = 24;
-    // Seconds for one full loop (one group width). Faster on small screens.
-    const LOOP_SECONDS = () => (root.clientWidth < 760 ? 35 : 45);
+    const LOOP_SECONDS = 45;
 
     let offset = 0;
     let loopWidth = 0;
@@ -510,10 +510,15 @@ document.addEventListener('DOMContentLoaded', () => {
     let hovering = false;
     let rafId = 0;
     let lastTs = 0;
+    let isSwipe = false;
 
-    function layout() {
+    function isMobile() {
+      return mobileMq.matches;
+    }
+
+    function layoutDesktop() {
       if (reduceMotion) return;
-      const visible = root.clientWidth < 760 ? 1 : 2;
+      const visible = 2;
       const cardWidth = Math.floor((root.clientWidth - GAP * (visible - 1)) / visible);
       root.querySelectorAll('.testimonial-card').forEach((card) => {
         card.style.width = cardWidth + 'px';
@@ -524,13 +529,34 @@ document.addEventListener('DOMContentLoaded', () => {
       track.style.transform = 'translate3d(' + (-offset) + 'px, 0, 0)';
     }
 
+    function layoutSwipe() {
+      root.querySelectorAll('.testimonial-card').forEach((card) => {
+        card.style.width = '';
+      });
+      track.style.transform = '';
+      offset = 0;
+      loopWidth = 0;
+    }
+
+    function stopRaf() {
+      if (rafId) {
+        cancelAnimationFrame(rafId);
+        rafId = 0;
+      }
+      lastTs = 0;
+    }
+
     function tick(ts) {
+      if (isSwipe || reduceMotion) {
+        rafId = 0;
+        return;
+      }
       if (!lastTs) lastTs = ts;
       const dt = Math.min(64, ts - lastTs);
       lastTs = ts;
 
-      if (!paused && !hovering && !reduceMotion && loopWidth > 0) {
-        const speed = loopWidth / (LOOP_SECONDS() * 1000); // px per ms
+      if (!paused && !hovering && loopWidth > 0) {
+        const speed = loopWidth / (LOOP_SECONDS * 1000);
         offset += speed * dt;
         if (offset >= loopWidth) offset -= loopWidth;
         track.style.transform = 'translate3d(' + (-offset) + 'px, 0, 0)';
@@ -539,33 +565,60 @@ document.addEventListener('DOMContentLoaded', () => {
       rafId = requestAnimationFrame(tick);
     }
 
+    function startMarquee() {
+      if (isSwipe || reduceMotion || rafId) return;
+      lastTs = 0;
+      rafId = requestAnimationFrame(tick);
+    }
+
+    function applyMode() {
+      const wantSwipe = isMobile();
+      isSwipe = wantSwipe;
+      root.classList.toggle('is-swipe', isSwipe);
+      root.classList.toggle('is-marquee', !isSwipe);
+      root.setAttribute('aria-roledescription', isSwipe ? 'carousel' : 'marquee');
+
+      if (isSwipe) {
+        stopRaf();
+        layoutSwipe();
+      } else {
+        layoutDesktop();
+        startMarquee();
+      }
+    }
+
     function pauseMarquee() {
       paused = true;
     }
 
     function resumeMarquee() {
-      if (reduceMotion) return;
+      if (reduceMotion || isSwipe) return;
       paused = false;
-      lastTs = 0; // avoid a jump after the modal was open
+      lastTs = 0;
       const active = document.activeElement;
       if (active && root.contains(active) && typeof active.blur === 'function') {
         active.blur();
       }
+      startMarquee();
     }
 
-    layout();
-    window.addEventListener('resize', layout);
+    applyMode();
+    if (mobileMq.addEventListener) {
+      mobileMq.addEventListener('change', applyMode);
+    } else if (mobileMq.addListener) {
+      mobileMq.addListener(applyMode);
+    }
+    window.addEventListener('resize', () => {
+      if (isSwipe) layoutSwipe();
+      else layoutDesktop();
+    });
 
-    if (!reduceMotion) {
-      rafId = requestAnimationFrame(tick);
-      // Desktop only: pause while hovering the strip
-      if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
-        root.addEventListener('mouseenter', () => { hovering = true; });
-        root.addEventListener('mouseleave', () => { hovering = false; });
-      }
+    if (!reduceMotion && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+      root.addEventListener('mouseenter', () => { hovering = true; });
+      root.addEventListener('mouseleave', () => { hovering = false; });
     }
 
-    // Tap/click a card → open full quote; close → resume scroll
+    // Tap/click a card → open full quote; close → resume scroll (desktop only)
     let modal = null;
     let closeTimer = null;
 
@@ -598,6 +651,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const name = (card.querySelector('.name') || {}).textContent || '';
       const role = (card.querySelector('.role') || {}).textContent || '';
       const avatar = (card.querySelector('.testimonial-avatar') || {}).textContent || '';
+      const doneLabel = isSwipe ? 'Close' : 'Back to scrolling';
 
       teardownModal();
       pauseMarquee();
@@ -616,13 +670,14 @@ document.addEventListener('DOMContentLoaded', () => {
         '    <div class="testimonial-avatar"></div>' +
         '    <div><p class="name"></p><p class="role"></p></div>' +
         '  </div>' +
-        '  <button type="button" class="btn-download testimonial-modal-done">Back to scrolling</button>' +
+        '  <button type="button" class="btn-download testimonial-modal-done"></button>' +
         '</div>';
 
       modal.querySelector('.testimonial-modal-quote').textContent = quote.trim();
       modal.querySelector('.testimonial-avatar').textContent = avatar.trim();
       modal.querySelector('.name').textContent = name.trim();
       modal.querySelector('.role').textContent = role.trim();
+      modal.querySelector('.testimonial-modal-done').textContent = doneLabel;
 
       document.body.appendChild(modal);
       document.body.classList.add('modal-open');
@@ -635,11 +690,31 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
 
-    root.querySelectorAll('.testimonial-card').forEach((card) => {
+    // On swipe mode, distinguish tap (open) from horizontal drag
+    root.querySelectorAll('.testimonial-marquee-group:not([aria-hidden="true"]) .testimonial-card').forEach((card) => {
       card.setAttribute('tabindex', '0');
       card.setAttribute('role', 'button');
       card.setAttribute('aria-label', 'Read full testimonial');
-      card.addEventListener('click', () => openModal(card));
+
+      let startX = 0;
+      let startY = 0;
+      let moved = false;
+
+      card.addEventListener('pointerdown', (e) => {
+        startX = e.clientX;
+        startY = e.clientY;
+        moved = false;
+      });
+      card.addEventListener('pointermove', (e) => {
+        if (Math.abs(e.clientX - startX) > 10 || Math.abs(e.clientY - startY) > 10) moved = true;
+      });
+      card.addEventListener('click', (e) => {
+        if (moved) {
+          e.preventDefault();
+          return;
+        }
+        openModal(card);
+      });
       card.addEventListener('keydown', (e) => {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
