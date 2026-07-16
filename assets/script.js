@@ -261,7 +261,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (!reduceMotion && 'IntersectionObserver' in window) {
     // 1) Content blocks tip up into place as they enter the viewport.
     const revealSelector = [
-      '.card', '.home-tile', '.page-header', '.detail-figure', '.detail-body',
+      '.card', '.home-tile', '.home-stat', '.page-header', '.detail-figure', '.detail-body',
       '.gallery-item', '.entry-block', '.about-photo', '.about-text', '.skills-group',
       '.testimonial-grid .testimonial-card', '.about-resume', '.contact',
       '.tutoring-section', '.tutoring-section-head'
@@ -270,7 +270,7 @@ document.addEventListener('DOMContentLoaded', () => {
     revealEls.forEach((el) => el.classList.add('reveal-3d'));
 
     // Stagger neighbours inside grids so they cascade instead of popping together.
-    document.querySelectorAll('.card-grid, .home-grid, .skills-groups').forEach((grid) => {
+    document.querySelectorAll('.card-grid, .home-grid, .skills-groups, .home-stats').forEach((grid) => {
       Array.from(grid.children).forEach((child, i) => {
         child.style.setProperty('--reveal-delay', (i % 6) * 70 + 'ms');
       });
@@ -383,14 +383,25 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ---------- Infinite testimonials carousel (homepage) ----------
-  // CSS handles the -50% loop; JS sizes cards and opens a read modal on tap.
+  // JS-driven translate for reliable pause/resume on mobile (CSS animation-play-state sticks after tap).
   (function initTestimonialMarquee() {
     const root = document.querySelector('[data-marquee]');
     if (!root) return;
 
     const track = root.querySelector('.testimonial-marquee-track');
+    if (!track) return;
+
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const GAP = 24;
+    // Seconds for one full loop (one group width). Faster on small screens.
+    const LOOP_SECONDS = () => (root.clientWidth < 760 ? 35 : 45);
+
+    let offset = 0;
+    let loopWidth = 0;
+    let paused = false;
+    let hovering = false;
+    let rafId = 0;
+    let lastTs = 0;
 
     function layout() {
       if (reduceMotion) return;
@@ -399,22 +410,56 @@ document.addEventListener('DOMContentLoaded', () => {
       root.querySelectorAll('.testimonial-card').forEach((card) => {
         card.style.width = cardWidth + 'px';
       });
+      const group = track.querySelector('.testimonial-marquee-group');
+      loopWidth = group ? group.offsetWidth : Math.floor(track.scrollWidth / 2);
+      if (loopWidth > 0) offset = offset % loopWidth;
+      track.style.transform = 'translate3d(' + (-offset) + 'px, 0, 0)';
+    }
+
+    function tick(ts) {
+      if (!lastTs) lastTs = ts;
+      const dt = Math.min(64, ts - lastTs);
+      lastTs = ts;
+
+      if (!paused && !hovering && !reduceMotion && loopWidth > 0) {
+        const speed = loopWidth / (LOOP_SECONDS() * 1000); // px per ms
+        offset += speed * dt;
+        if (offset >= loopWidth) offset -= loopWidth;
+        track.style.transform = 'translate3d(' + (-offset) + 'px, 0, 0)';
+      }
+
+      rafId = requestAnimationFrame(tick);
+    }
+
+    function pauseMarquee() {
+      paused = true;
+    }
+
+    function resumeMarquee() {
+      if (reduceMotion) return;
+      paused = false;
+      lastTs = 0; // avoid a jump after the modal was open
+      const active = document.activeElement;
+      if (active && root.contains(active) && typeof active.blur === 'function') {
+        active.blur();
+      }
     }
 
     layout();
     window.addEventListener('resize', layout);
 
+    if (!reduceMotion) {
+      rafId = requestAnimationFrame(tick);
+      // Desktop only: pause while hovering the strip
+      if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+        root.addEventListener('mouseenter', () => { hovering = true; });
+        root.addEventListener('mouseleave', () => { hovering = false; });
+      }
+    }
+
     // Tap/click a card → open full quote; close → resume scroll
     let modal = null;
     let closeTimer = null;
-
-    function pauseMarquee() {
-      if (track) track.style.animationPlayState = 'paused';
-    }
-
-    function resumeMarquee() {
-      if (track && !reduceMotion) track.style.animationPlayState = '';
-    }
 
     function teardownModal() {
       if (closeTimer) {
@@ -433,9 +478,9 @@ document.addEventListener('DOMContentLoaded', () => {
       const el = modal;
       modal = null;
       document.body.classList.remove('modal-open');
+      resumeMarquee();
       closeTimer = window.setTimeout(() => {
         if (el.parentNode) el.parentNode.removeChild(el);
-        if (!modal) resumeMarquee();
         closeTimer = null;
       }, 220);
     }
