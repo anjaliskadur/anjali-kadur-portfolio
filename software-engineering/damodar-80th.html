@@ -12,8 +12,8 @@
 </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sourdough — Anjali Kadur</title>
-<meta name="description" content="Bakes, crumb shots, and starter notes.">
+<title>Damodar's 80th Birthday Site — Anjali Kadur</title>
+<meta name="description" content="A mobile-first invitation site for Damodar Kadambi's 80th birthday — polaroid photo wall, online RSVP, and a shared memory wall built with Next.js, TypeScript, Tailwind, and Supabase.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;0,600;1,500&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
@@ -32,47 +32,34 @@
       </a>
       <nav class="nav-links">
         <a href="../bio/">Bio</a>
-        <a href="../software-engineering/">Software Engineering</a>
+        <a href="../software-engineering/" class="active">Software Engineering</a>
         <a href="../tutoring/">Tutoring</a>
         <a href="../project-management/">Project Management</a>
         <a href="../silambam-houston/">Silambam Houston</a>
         <a href="../lighting-design/">Lighting Design</a>
         <a href="../event-planning/">Event Planning</a>
-        <a href="../hobbies/" class="active">Hobbies</a>
+        <a href="../hobbies/">Hobbies</a>
       </nav>
       <button class="nav-toggle" aria-label="Toggle navigation"><span></span></button>
     </div>
   </header>
 <main id="main">
     <section class="detail wrap">
-      <a class="back-link" href="./">&#8592; Back to Hobbies</a>
-      <div class="detail-body">
-        <div><span class="tag">Baking</span></div>
-        <h2>Sourdough</h2>
-        <p>Recent bakes and crumb shots from an ongoing love affair with a stubborn starter — crusty loaves, open crumb, and the occasional flop.</p>
+      <a class="back-link" href="./">&#8592; Back to Software Engineering Projects</a>
+      <div class="entries-header">
+        <div><span class="tag">Next.js</span><span class="tag">TypeScript</span><span class="tag">Tailwind</span><span class="tag">Supabase</span></div>
+        <h2>Damodar's 80th Birthday Site</h2>
+        <p>A mobile-first invitation site for Damodar Kadambi&#8217;s 80th birthday. The homepage opens on a full-bleed, alternating polaroid photo wall that shuffles on every visit, with event details and CTAs layered on top. Guests can RSVP online and contribute to a shared memory wall &#8212; photos, videos, or notes &#8212; without creating accounts. Edit/delete is handled with one-time browser tokens (plus an optional admin passcode for moderation). Built with Next.js, TypeScript, Tailwind, and Supabase so the family can collect RSVPs and keepsakes before and during the celebration. Live at <a href="https://damodar80th-neon.vercel.app" target="_blank" rel="noopener">damodar80th-neon.vercel.app</a>.</p>
       </div>
-      <div class="photo-gallery">
-        <figure class="gallery-item">
-          <img src="../assets/img/07-hobbies/sourdough/IMG_2780.jpeg" alt="Chutney Pudi Swirl Slice" loading="lazy">
-          <figcaption>Chutney Pudi Swirl Slice</figcaption>
-        </figure>
-        <figure class="gallery-item">
-          <img src="../assets/img/07-hobbies/sourdough/IMG_3138.jpeg" alt="Chili Oil, Cheddar, Green Onion Loaf" loading="lazy">
-          <figcaption>Chili Oil, Cheddar, Green Onion Loaf</figcaption>
-        </figure>
-        <figure class="gallery-item">
-          <img src="../assets/img/07-hobbies/sourdough/IMG_3917.jpeg" alt="Plain Sourdough" loading="lazy">
-          <figcaption>Plain Sourdough</figcaption>
-        </figure>
-        <figure class="gallery-item">
-          <img src="../assets/img/07-hobbies/sourdough/IMG_3989.jpeg" alt="Jalapeño Cheddar Loaf" loading="lazy">
-          <figcaption>Jalapeño Cheddar Loaf</figcaption>
-        </figure>
-        <figure class="gallery-item">
-          <img src="../assets/img/07-hobbies/sourdough/IMG_3999.jpeg" alt="Jalapeño Cheddar Slice" loading="lazy">
-          <figcaption>Jalapeño Cheddar Slice</figcaption>
-        </figure>
+    </section>
+    <section class="entries wrap">
+      <div class="entry-block">
+      <div class="detail-figure has-image"><img src="../assets/img/01%20-%20software%20engineering/damodar-80th/damodar-80th-home.png" alt="Damodar's 80th birthday invitation homepage with a polaroid photo wall and centered invitation card"></div>
+      <div class="entry-body">
+        <h3>Invitation Landing &amp; Photo Wall</h3>
+        <p>The landing experience is built around a full-bleed polaroid collage that reshuffles on each visit, with a centered invitation card carrying the date, venue, and primary actions &#8212; <em>RSVP</em> and <em>Visit the Memory Wall</em>. The stack is Next.js and TypeScript with Tailwind for a mobile-first layout, and Supabase for guest RSVPs and memory submissions secured by one-time browser tokens.</p>
       </div>
+    </div>
     </section>
   </main>
 <section class="contact wrap" id="contact">
@@ -100,13 +87,13 @@
         <label for="contact-reason">What are you contacting me for?</label>
         <select id="contact-reason" name="reason" required>
           <option value="" disabled>Select a reason</option>
-          <option value="Software Engineering">Software Engineering</option>
+          <option value="Software Engineering" selected>Software Engineering</option>
           <option value="Tutoring">Tutoring</option>
           <option value="Project Management">Project Management</option>
           <option value="Event Planning">Event Planning</option>
           <option value="Lighting Design">Lighting Design</option>
           <option value="Silambam Houston">Silambam Houston</option>
-          <option value="Hobbies" selected>Hobbies</option>
+          <option value="Hobbies">Hobbies</option>
           <option value="Other">Other</option>
         </select>
       </div>

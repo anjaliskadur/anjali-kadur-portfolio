@@ -1409,20 +1409,6 @@ a.btn-outline:hover {
   border-color: var(--line);
 }
 
-.card-thumb.thumb-pacman,
-.detail-figure.thumb-pacman {
-  background: linear-gradient(145deg, #1a1a2e 0%, #16213e 55%, #0f3460 100%);
-  display: grid;
-  place-items: center;
-}
-.card-thumb.thumb-pacman span,
-.detail-figure.thumb-pacman span {
-  font-family: var(--display);
-  color: #ffd166;
-  font-size: 1.35rem;
-  letter-spacing: 0.04em;
-}
-
 /* Testimonial read modal (tap/click to pause & read) */
 .testimonial-modal {
   position: fixed;
